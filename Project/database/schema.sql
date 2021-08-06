@@ -1,15 +1,15 @@
 BEGIN TRANSACTION;
 
-CREATE SEQUENCE seq_ticket_id
+CREATE SEQUENCE seq_tickets_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
   
-CREATE TABLE ticket (
-	ticket_id int DEFAULT nextval('seq_ticket_id'::regclass) NOT NULL,
+CREATE TABLE tickets (
+	tickets_id int DEFAULT nextval('seq_tickets_id'::regclass) NOT NULL,
         repair_type varchar(25) NOT NULL,
-	CONSTRAINT PK_ticket PRIMARY KEY (ticket_id)
+	CONSTRAINT PK_tickets PRIMARY KEY (tickets_id)
 );
 
 CREATE USER repair_tickets_owner
@@ -34,5 +34,6 @@ GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
 TO repair_tickets_appuser;
 
+INSERT INTO tickets (repair_type) VALUES ('maintenance');
 
 COMMIT TRANSACTION;
