@@ -12,4 +12,27 @@ CREATE TABLE ticket (
 	CONSTRAINT PK_ticket PRIMARY KEY (ticket_id)
 );
 
+CREATE USER repair_tickets_owner
+WITH PASSWORD 'repairtickets';
+
+GRANT ALL
+ON ALL TABLES IN SCHEMA public
+TO repair_tickets_owner;
+
+GRANT ALL
+ON ALL SEQUENCES IN SCHEMA public
+TO repair_tickets_owner;
+
+CREATE USER repair_tickets_appuser
+WITH PASSWORD 'repairtickets';
+
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON ALL TABLES IN SCHEMA public
+TO repair_tickets_appuser;
+
+GRANT USAGE, SELECT
+ON ALL SEQUENCES IN SCHEMA public
+TO repair_tickets_appuser;
+
+
 COMMIT TRANSACTION;
