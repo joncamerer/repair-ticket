@@ -20,9 +20,16 @@ public class TicketSqlDAO implements TicketDAO {
     }
 
     @Override
-    public List<Ticket> listAll() {
+    public void create(Ticket ticket) {
+        String sql = "INSERT INTO tickets (repair_type) VALUES (?)";
+
+        jdbcTemplate.update(sql, ticket.getRepairType());
+    }
+
+    @Override
+    public List<Ticket> listActive() {
         List<Ticket> tickets = new ArrayList<>();
-        String sql = "SELECT tickets_id, repair_type FROM tickets";
+        String sql = "SELECT tickets_id, repair_type, active FROM tickets WHERE active = true";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -39,6 +46,7 @@ public class TicketSqlDAO implements TicketDAO {
 
         ticket.setId(row.getLong("tickets_id"));
         ticket.setRepairType(row.getString("repair_type"));
+        ticket.setActive(row.getBoolean("active"));
 
         return ticket;
     }

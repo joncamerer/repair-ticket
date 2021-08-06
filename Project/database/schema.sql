@@ -9,6 +9,7 @@ CREATE SEQUENCE seq_tickets_id
 CREATE TABLE tickets (
 	tickets_id int DEFAULT nextval('seq_tickets_id'::regclass) NOT NULL,
         repair_type varchar(25) NOT NULL,
+        active boolean DEFAULT true NOT NULL,
 	CONSTRAINT PK_tickets PRIMARY KEY (tickets_id)
 );
 

@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface TicketDAO {
 
-    List<Ticket> listAll();
+    void create(Ticket ticket);
+    List<Ticket> listActive();
 }

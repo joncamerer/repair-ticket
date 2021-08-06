@@ -3,6 +3,7 @@ package com.camerer.tickets.model;
 public class Ticket {
     private long id;
     private String repairType;
+    private boolean active;
 
     public Ticket() {
 
@@ -11,6 +12,7 @@ public class Ticket {
     public Ticket(long id, String repairType) {
         this.id = id;
         this.repairType = repairType;
+        this.active = true;
     }
 
     public long getId() {
@@ -27,5 +29,13 @@ public class Ticket {
 
     public void setRepairType(String repairType) {
         this.repairType = repairType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
