@@ -2,16 +2,16 @@ package com.camerer.tickets.model;
 
 public class Ticket {
     private long id;
-    private String repairType;
+    private String description;
     private boolean active;
 
     public Ticket() {
 
     }
 
-    public Ticket(long id, String repairType) {
+    public Ticket(long id, String description) {
         this.id = id;
-        this.repairType = repairType;
+        this.description = description;
         this.active = true;
     }
 
@@ -23,12 +23,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getRepairType() {
-        return repairType;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRepairType(String repairType) {
-        this.repairType = repairType;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public boolean isActive() {
