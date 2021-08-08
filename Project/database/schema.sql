@@ -1,12 +1,47 @@
 BEGIN TRANSACTION;
 
+/* TABLES */
+
 CREATE TABLE address (
 	address_id SERIAL PRIMARY KEY,
-        street_no INT NOT NULL,
-        street_name VARCHAR(25) NOT NULL,
-        city VARCHAR(25) NOT NULL,
-        state VARCHAR(25) NOT NULL,
-        zip_code INT NOT NULL
+        street_no integer NOT NULL,
+        street_name varchar(25) NOT NULL,
+        city varchar(25) NOT NULL,
+        state varchar(25) NOT NULL,
+        zip_code integer NOT NULL
+);
+
+CREATE TABLE contact (
+        contact_id SERIAL PRIMARY KEY,
+        first_name varchar(25) NOT NULL,
+        last_name varchar(25) NOT NULL,
+        email varchar(50),
+        phone varchar(20),
+        address_id integer REFERENCES address
+);
+
+CREATE TABLE location (
+        location_id SERIAL PRIMARY KEY,
+        name varchar(50) NOT NULL,
+        address_id integer REFERENCES address
+);
+
+CREATE TABLE position (
+        position_id SERIAL PRIMARY KEY,
+        name varchar(50) NOT NULL
+);
+
+CREATE TABLE employee (
+        employee_id SERIAL PRIMARY KEY,
+        contact_id integer REFERENCES contact,
+        position_id integer REFERENCES position,
+        hire_date DATE NOT NULL
+);
+
+CREATE TABLE employee_location (
+        employee_id integer REFERENCES employee,
+        location_id integer REFERENCES location,
+        UNIQUE (employee_id, location_id)
 );
 
 CREATE TABLE ticket (
@@ -14,6 +49,8 @@ CREATE TABLE ticket (
         repair_type varchar(25) NOT NULL,
         active boolean DEFAULT true NOT NULL
 );
+
+/* DB USERS */
 
 CREATE USER repair_tickets_owner
 WITH PASSWORD 'repairtickets';
