@@ -35,18 +35,65 @@ CREATE TABLE employee (
         employee_id SERIAL PRIMARY KEY,
         contact_id integer REFERENCES contact,
         position_id integer REFERENCES position,
-        hire_date DATE NOT NULL
+        hire_date date NOT NULL
 );
 
 CREATE TABLE employee_location (
         employee_id integer REFERENCES employee,
         location_id integer REFERENCES location,
-        UNIQUE (employee_id, location_id)
+        PRIMARY KEY (employee_id, location_id)
+);
+
+CREATE TABLE contractor (
+        contractor_id SERIAL PRIMARY KEY,
+        contact_id integer REFERENCES contact
+);
+
+CREATE TABLE service_category (
+        service_category_id SERIAL PRIMARY KEY,
+        name varchar(50) NOT NULL
+);
+
+CREATE TABLE contractor_service_category (
+        contractor_id integer REFERENCES contractor,
+        service_category_id integer REFERENCES service_category,
+        PRIMARY KEY (contractor_id, service_category_id)
+);
+
+CREATE TABLE equipment_type (
+        equipment_type_id SERIAL PRIMARY KEY,
+        name varchar(25) NOT NULL
+);
+
+CREATE TABLE equipment (
+        equipment_id SERIAL PRIMARY KEY,
+        brand varchar(50) NOT NULL,
+        model varchar(50) NOT NULL,
+        serial_no varchar(50) NOT NULL,
+        equipment_type_id integer REFERENCES equipment_type,
+        location_id integer REFERENCES location
 );
 
 CREATE TABLE ticket (
 	ticket_id SERIAL PRIMARY KEY,
-        repair_type varchar(25) NOT NULL,
+	location_id integer REFERENCES location,
+	equipment_id integer REFERENCES equipment,
+	service_category_id integer REFERENCES service_category,
+	description varchar(500) NOT NULL,
+	employee_id integer REFERENCES employee,
+	contractor_id integer REFERENCES contractor,
+	estimate bigint,
+	completed_on date,
+        active boolean DEFAULT true NOT NULL
+);
+
+CREATE TABLE invoice (
+        invoice_id SERIAL PRIMARY KEY,
+        ticket_id integer REFERENCES ticket,
+        invoice_no integer,
+        invoice_total bigint NOT NULL,
+        due_date date NOT NULL,
+        paid_date date,
         active boolean DEFAULT true NOT NULL
 );
 
