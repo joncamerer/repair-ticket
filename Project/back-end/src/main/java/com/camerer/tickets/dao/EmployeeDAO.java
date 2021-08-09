@@ -5,6 +5,7 @@ import com.camerer.tickets.model.Employee;
 
 public interface EmployeeDAO {
 
+    void create(Employee employee);
     Employee getEmployeeById(long id) throws EmployeeNotFoundException;
 
 }
