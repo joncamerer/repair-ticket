@@ -60,8 +60,8 @@ CREATE TABLE contractor_service_category (
         PRIMARY KEY (contractor_id, service_category_id)
 );
 
-CREATE TABLE equipment_type (
-        equipment_type_id SERIAL PRIMARY KEY,
+CREATE TABLE equipment_category (
+        equipment_category_id SERIAL PRIMARY KEY,
         name varchar(25) NOT NULL
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE equipment (
         brand varchar(50) NOT NULL,
         model varchar(50) NOT NULL,
         serial_no varchar(50) NOT NULL,
-        equipment_type_id integer REFERENCES equipment_type,
+        equipment_category_id integer REFERENCES equipment_category,
         location_id integer REFERENCES location
 );
 

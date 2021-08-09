@@ -6,7 +6,7 @@ BEGIN TRANSACTION;
 DROP TABLE IF EXISTS invoice;
 DROP TABLE IF EXISTS ticket;
 DROP TABLE IF EXISTS equipment;
-DROP TABLE IF EXISTS equipment_type;
+DROP TABLE IF EXISTS equipment_category;
 DROP TABLE IF EXISTS contractor_service_category;
 DROP TABLE IF EXISTS service_category;
 DROP TABLE IF EXISTS contractor;
