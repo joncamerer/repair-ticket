@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class EmployeeController {
 
@@ -15,7 +17,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/employees/", method = RequestMethod.POST)
-    public void create(@RequestBody Employee employee){
+    public void create(@Valid @RequestBody Employee employee){
         employeeSqlDAO.create(employee);
     }
 

@@ -1,21 +1,32 @@
 package com.camerer.tickets.model;
 
+import javax.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
 public class Employee {
 
     private long id;
+    @NotBlank(message = "first name is required")
     private String firstName;
+    @NotBlank(message = "last name is required")
     private String lastName;
     private String email;
     private String phone;
+    @Positive(message = "street number is required")
     private long streetNumber;
+    @NotBlank(message = "street name is required")
     private String streetName;
+    @NotBlank(message = "city is required")
     private String city;
+    @NotBlank(message = "state is required")
     private String state;
+    @Positive(message = "zip code is required")
+    @Digits(integer = 5, fraction = 0)
     private int zip_code;
+    @NotNull(message = "hire date is required")
     private Date hireDate;
+    @NotBlank(message = "position is required")
     private String position;
     private List<String> locations;
 
