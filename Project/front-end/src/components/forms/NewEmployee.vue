@@ -1,0 +1,156 @@
+<template>
+  <div class="new-employee">
+    <form v-on:submit.prevent="addEmployee()">
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-first-name">First Name:</label>
+        <input
+          id="new-emp-first-name"
+          type="text"
+          placeholder="First Name"
+          v-model="newEmployee.firstName"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-last-name">Last Name:</label>
+        <input
+          id="new-emp-last-name"
+          type="text"
+          placeholder="Last Name"
+          v-model="newEmployee.lastName"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-email">Email:</label>
+        <input
+          id="new-emp-email"
+          type="email"
+          placeholder="Email"
+          v-model="newEmployee.email"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-phone">Phone Number:</label>
+        <input
+          id="new-emp-phone"
+          type="tel"
+          placeholder="Phone Number"
+          v-model="newEmployee.phone"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-street-no"
+          >Street Number:</label
+        >
+        <input
+          id="new-emp-street-no"
+          type="text"
+          placeholder="Street Number"
+          v-model="newEmployee.streetNumber"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-street-name"
+          >Street Name:</label
+        >
+        <input
+          id="new-emp-street-name"
+          type="text"
+          placeholder="Street Name"
+          v-model="newEmployee.streetName"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-city">City:</label>
+        <input
+          id="new-emp-city"
+          type="text"
+          placeholder="City"
+          v-model="newEmployee.city"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-state">State:</label>
+        <input
+          id="new-emp-state"
+          type=""
+          placeholder="State"
+          v-model="newEmployee.state"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-zip-code">Zip Code:</label>
+        <input
+          id="new-emp-zip-code"
+          type=""
+          placeholder="Zip Code"
+          v-model="newEmployee.zipCode"
+        />
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-position">Position:</label>
+        <select id="new-emp-position" v-model="newEmployee.position">
+          <option value="">--Please select a position</option>
+          <option v-for="(position, key) in positions" :key="key">
+            {{ position }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-pair">
+        <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
+        <input
+          id="new-emp-hire-date"
+          type=""
+          placeholder="Hire Date"
+          v-model="newEmployee.hireDate"
+        />
+      </div>
+
+      <div>
+        <button type="submit">Submit</button>
+        <button type="button" v-on:click.prevent="hideForm()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+import employeeService from "@/services/EmployeeService";
+
+export default {
+  data() {
+    return {
+      newEmployee: {
+        position: "",
+      },
+      positions: ["Shift", "Administrator"],
+    };
+  },
+  methods: {
+    addEmployee() {
+      this.newEmployee.hireDate = Date.now();
+
+      employeeService.create(this.newEmployee).then((response) => {
+        if (response.status === 201) {
+          this.router.go();
+        }
+      });
+    },
+    hideForm() {
+      this.$emit("hideForm");
+    },
+  },
+};
+</script>
+
+<style>
+</style>

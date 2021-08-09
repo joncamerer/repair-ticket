@@ -17,7 +17,7 @@ public class EmployeeController {
     EmployeeSqlDAO employeeSqlDAO;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/employees/", method = RequestMethod.POST)
+    @RequestMapping(path = "/employees", method = RequestMethod.POST)
     public void create(@Valid @RequestBody Employee employee){
         employeeSqlDAO.create(employee);
     }
