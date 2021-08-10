@@ -79,7 +79,7 @@
         <label class="hidden-label" for="new-emp-state">State:</label>
         <input
           id="new-emp-state"
-          type=""
+          type="text"
           placeholder="State"
           v-model="newEmployee.state"
         />
@@ -89,7 +89,7 @@
         <label class="hidden-label" for="new-emp-zip-code">Zip Code:</label>
         <input
           id="new-emp-zip-code"
-          type=""
+          type="text"
           placeholder="Zip Code"
           v-model="newEmployee.zipCode"
         />
@@ -99,8 +99,8 @@
         <label class="hidden-label" for="new-emp-position">Position:</label>
         <select id="new-emp-position" v-model="newEmployee.position">
           <option value="">--Please select a position</option>
-          <option v-for="(position, key) in positions" :key="key">
-            {{ position }}
+          <option v-for="(position, key) in $store.state.positions" :key="key">
+            {{ position.name }}
           </option>
         </select>
       </div>
@@ -109,8 +109,7 @@
         <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
         <input
           id="new-emp-hire-date"
-          type=""
-          placeholder="Hire Date"
+          type="date"
           v-model="newEmployee.hireDate"
         />
       </div>
@@ -131,17 +130,31 @@ export default {
     return {
       newEmployee: {
         position: "",
+        hireDate: "",
       },
-      positions: ["Shift", "Administrator"],
     };
+  },
+  created() {
+    var today = new Date();
+    var month = "" + (today.getMonth() + 1);
+    var day = "" + today.getDate();
+    var year = today.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    this.newEmployee.hireDate = [year, month, day].join("-");
   },
   methods: {
     addEmployee() {
-      this.newEmployee.hireDate = Date.now();
+      var today = new Date(this.newEmployee.hireDate);
+      this.newEmployee.hireDate = new Date(
+        today.getTime() + today.getTimezoneOffset() * 60000
+      );
 
       employeeService.create(this.newEmployee).then((response) => {
         if (response.status === 201) {
-          this.router.go();
+          this.$router.go();
         }
       });
     },

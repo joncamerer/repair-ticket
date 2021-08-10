@@ -44,7 +44,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
                 ps.setString(2, employee.getStreetName());
                 ps.setString(3, employee.getCity());
                 ps.setString(4, employee.getState());
-                ps.setInt(5, employee.getZip_code());
+                ps.setInt(5, employee.getZipCode());
 
                 return ps;
             }
@@ -101,7 +101,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         employee.setStreetName(row.getString("street_name"));
         employee.setCity(row.getString("city"));
         employee.setState(row.getString("state"));
-        employee.setZip_code(row.getInt("zip_code"));
+        employee.setZipCode(row.getInt("zip_code"));
         employee.setHireDate(row.getDate("hire_date"));
         employee.setPosition(row.getString("position"));
 

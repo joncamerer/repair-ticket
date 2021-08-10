@@ -22,8 +22,7 @@ public class Employee {
     @NotBlank(message = "state is required")
     private String state;
     @Positive(message = "zip code is required")
-    @Digits(integer = 5, fraction = 0)
-    private int zip_code;
+    private int zipCode;
     @NotNull(message = "hire date is required")
     private Date hireDate;
     @NotBlank(message = "position is required")
@@ -35,7 +34,7 @@ public class Employee {
     }
 
     public Employee(long id, String firstName, String lastName, long streetNumber, String streetName,
-                    String email, String phone, String city, String state, int zip_code, Date hireDate,
+                    String email, String phone, String city, String state, int zipCode, Date hireDate,
                     String position, List<String> locations) {
         this.id = id;
         this.firstName = firstName;
@@ -46,7 +45,7 @@ public class Employee {
         this.streetName = streetName;
         this.city = city;
         this.state = state;
-        this.zip_code = zip_code;
+        this.zipCode = zipCode;
         this.hireDate = hireDate;
         this.position = position;
         this.locations = locations;
@@ -124,12 +123,12 @@ public class Employee {
         this.state = state;
     }
 
-    public int getZip_code() {
-        return zip_code;
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public void setZip_code(int zip_code) {
-        this.zip_code = zip_code;
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
     public Date getHireDate() {
