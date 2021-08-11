@@ -1,6 +1,6 @@
 <template>
   <div id="location-list">
-    <div>
+    <div class="list-title-button">
       <h1>Location List</h1>
       <button type="button" v-on:click="toggleShowForm()">
         {{ showForm ? "-" : "+" }}

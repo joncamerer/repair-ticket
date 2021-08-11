@@ -1,9 +1,11 @@
 <template>
   <div id="contractor-list">
-    <h1>Contractor List</h1>
-    <button type="button" v-on:click="toggleShowForm()">
-      {{ showForm ? "-" : "+" }}
-    </button>
+    <div class="list-title-button">
+      <h1>Contractor List</h1>
+      <button type="button" v-on:click="toggleShowForm()">
+        {{ showForm ? "-" : "+" }}
+      </button>
+    </div>
 
     <div v-if="showForm">
       <new-contractor v-on:hideForm="toggleShowForm()" />

@@ -29,3 +29,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.list-title-button {
+  display: flex;
+}
+</style>

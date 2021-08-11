@@ -1,9 +1,11 @@
 <template>
   <div id="employee-list">
-    <h1>Employee List</h1>
-    <button type="button" v-on:click="toggleShowForm()">
-      {{ showForm ? "-" : "+" }}
-    </button>
+    <div class="list-title-button">
+      <h1>Employee List</h1>
+      <button type="button" v-on:click="toggleShowForm()">
+        {{ showForm ? "-" : "+" }}
+      </button>
+    </div>
 
     <div v-if="showForm">
       <new-employee v-on:hideForm="toggleShowForm()" />
