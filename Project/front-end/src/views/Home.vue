@@ -5,6 +5,7 @@
     <contractor-list />
     <new-contractor />
     <location-list />
+    <new-location />
   </div>
 </template>
 
@@ -14,17 +15,19 @@ import NewEmployee from "@/components/forms/NewEmployee";
 import ContractorList from "@/components/lists/ContractorList";
 import NewContractor from "@/components/forms/NewContractor";
 import LocationList from "@/components/lists/LocationList";
+import NewLocation from "@/components/forms/NewLocation";
 
 import positionService from "@/services/PositionService";
 
 export default {
   name: "Home",
   components: {
-    NewEmployee,
-    NewContractor,
     EmployeeList,
+    NewEmployee,
     ContractorList,
+    NewContractor,
     LocationList,
+    NewLocation,
   },
   created() {
     positionService.list().then((response) => {
