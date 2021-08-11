@@ -1,24 +1,24 @@
 <template>
   <div class="home">
+    <employee-list />
     <new-employee />
     <new-contractor />
-    <Employee />
   </div>
 </template>
 
 <script>
-import Employee from "@/components/Employee";
+import EmployeeList from "@/components/lists/EmployeeList";
 import NewEmployee from "@/components/forms/NewEmployee";
-import NewContractor from "../components/forms/NewContractor.vue";
+import NewContractor from "@/components/forms/NewContractor";
 
 import positionService from "@/services/PositionService";
 
 export default {
   name: "Home",
   components: {
-    Employee,
     NewEmployee,
     NewContractor,
+    EmployeeList,
   },
   created() {
     positionService.list().then((response) => {

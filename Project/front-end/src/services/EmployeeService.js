@@ -9,6 +9,10 @@ export default {
         return http.post('/employees', employee);
     },
 
+    list() {
+        return http.get('employees');
+    },
+
     get(id) {
         return http.get(`/employees/${id}`);
     }
