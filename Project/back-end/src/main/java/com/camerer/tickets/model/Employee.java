@@ -1,7 +1,7 @@
 package com.camerer.tickets.model;
 
 import javax.validation.constraints.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Employee {
@@ -24,7 +24,7 @@ public class Employee {
     @Positive(message = "zip code is required")
     private int zipCode;
     @NotNull(message = "hire date is required")
-    private Date hireDate;
+    private LocalDate hireDate;
     @NotBlank(message = "position is required")
     private String position;
     private List<String> locations;
@@ -34,7 +34,7 @@ public class Employee {
     }
 
     public Employee(long id, String firstName, String lastName, long streetNumber, String streetName,
-                    String email, String phone, String city, String state, int zipCode, Date hireDate,
+                    String email, String phone, String city, String state, int zipCode, LocalDate hireDate,
                     String position, List<String> locations) {
         this.id = id;
         this.firstName = firstName;
@@ -131,11 +131,11 @@ public class Employee {
         this.zipCode = zipCode;
     }
 
-    public Date getHireDate() {
+    public LocalDate getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Date hireDate) {
+    public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
     }
 

@@ -23,12 +23,12 @@ import java.util.List;
 @Component
 public class ContractorSqlDAO implements ContractorDAO {
 
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
     AddressSqlDAO addressSqlDAO;
     @Autowired
     ContactSqlDAO contactSqlDAO;
+
+    private JdbcTemplate jdbcTemplate;
 
     public ContractorSqlDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

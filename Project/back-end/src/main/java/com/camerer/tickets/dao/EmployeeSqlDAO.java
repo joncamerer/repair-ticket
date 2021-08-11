@@ -1,7 +1,10 @@
 package com.camerer.tickets.dao;
 
 import com.camerer.tickets.exception.EmployeeNotFoundException;
+import com.camerer.tickets.model.Address;
+import com.camerer.tickets.model.Contact;
 import com.camerer.tickets.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +24,11 @@ import java.util.List;
 @Component
 public class EmployeeSqlDAO implements EmployeeDAO {
 
+    @Autowired
+    AddressSqlDAO addressSqlDAO;
+    @Autowired
+    ContactSqlDAO contactSqlDAO;
+
     private JdbcTemplate jdbcTemplate;
 
     public EmployeeSqlDAO(JdbcTemplate jdbcTemplate) {
@@ -27,47 +36,31 @@ public class EmployeeSqlDAO implements EmployeeDAO {
     }
 
     @Override
-    public void create(Employee employee) {
-        String addressSql = "INSERT INTO address (street_no, street_name, city, state, zip_code) " +
-                                "VALUES (?, ?, ?, ?, ?)";
-        String contactSql = "INSERT INTO contact (first_name, last_name, email, phone, address_id) " +
-                                "VALUES (?, ?, ?, ?, ?)";
-        String employeeSql = "INSERT INTO employee (contact_id, position_id, hire_date) VALUES (?, " +
+    public Employee create(Employee employee) throws EmployeeNotFoundException {
+        String sql = "INSERT INTO employee (contact_id, position_id, hire_date) VALUES (?, " +
                                 "(SELECT position_id FROM position WHERE name = ?), ?)";
+        Address address = new Address(employee.getStreetNumber(), employee.getStreetName(), employee.getCity(),
+                                      employee.getState(), employee.getZipCode());
+        long addressId = addressSqlDAO.create(address).getId();
 
-        KeyHolder addressKey = new GeneratedKeyHolder();
-        KeyHolder contactKey = new GeneratedKeyHolder();
-
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(addressSql, new String[] {"address_id"});
-                ps.setLong(1, employee.getStreetNumber());
-                ps.setString(2, employee.getStreetName());
-                ps.setString(3, employee.getCity());
-                ps.setString(4, employee.getState());
-                ps.setInt(5, employee.getZipCode());
-
-                return ps;
-            }
-        }, addressKey);
+        Contact contact = new Contact(employee.getFirstName(), employee.getLastName(), employee.getEmail(),
+                                      employee.getPhone(), addressId);
+        long contactId = contactSqlDAO.create(contact).getId();
+        KeyHolder employeeKey = new GeneratedKeyHolder();
 
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-                PreparedStatement ps = connection.prepareStatement(contactSql, new String[] {"contact_id"});
-                ps.setString(1, employee.getFirstName());
-                ps.setString(2, employee.getLastName());
-                ps.setString(3, employee.getEmail());
-                ps.setString(4, employee.getPhone());
-                ps.setInt(5, addressKey.getKey().intValue());
+                PreparedStatement ps = connection.prepareStatement(sql, new String[] {"employee_id"});
+                ps.setLong(1, contactId);
+                ps.setString(2, employee.getPosition());
+                ps.setObject(3, employee.getHireDate());
 
                 return ps;
             }
-        }, contactKey);
+        }, employeeKey);
 
-        jdbcTemplate.update(employeeSql,
-                            contactKey.getKey().intValue(), employee.getPosition(), employee.getHireDate());
+        return getEmployeeById(employeeKey.getKey().longValue());
     }
 
     @Override
@@ -122,7 +115,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         employee.setCity(row.getString("city"));
         employee.setState(row.getString("state"));
         employee.setZipCode(row.getInt("zip_code"));
-        employee.setHireDate(row.getDate("hire_date"));
+        employee.setHireDate(row.getDate("hire_date").toLocalDate());
         employee.setPosition(row.getString("position"));
 
         return employee;

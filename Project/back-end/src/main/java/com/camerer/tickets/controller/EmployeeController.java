@@ -19,8 +19,8 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/employees", method = RequestMethod.POST)
-    public void create(@Valid @RequestBody Employee employee){
-        employeeSqlDAO.create(employee);
+    public Employee create(@Valid @RequestBody Employee employee) throws EmployeeNotFoundException {
+        return employeeSqlDAO.create(employee);
     }
 
     @RequestMapping(path = "/employees", method = RequestMethod.GET)

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeDAO {
 
-    void create(Employee employee);
+    Employee create(Employee employee) throws EmployeeNotFoundException;
     List<Employee> listAll();
     Employee getEmployeeById(long id) throws EmployeeNotFoundException;
 
