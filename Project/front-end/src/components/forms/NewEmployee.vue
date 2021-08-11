@@ -1,5 +1,6 @@
 <template>
-  <div class="new-employee">
+  <div id="new-employee">
+    <h1>Create New Employee</h1>
     <form v-on:submit.prevent="addEmployee()">
       <div class="form-pair">
         <label class="hidden-label" for="new-emp-first-name">First Name:</label>
