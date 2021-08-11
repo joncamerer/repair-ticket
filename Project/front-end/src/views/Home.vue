@@ -4,6 +4,7 @@
     <new-employee />
     <contractor-list />
     <new-contractor />
+    <location-list />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import EmployeeList from "@/components/lists/EmployeeList";
 import NewEmployee from "@/components/forms/NewEmployee";
 import ContractorList from "@/components/lists/ContractorList";
 import NewContractor from "@/components/forms/NewContractor";
+import LocationList from "@/components/lists/LocationList";
 
 import positionService from "@/services/PositionService";
 
@@ -22,6 +24,7 @@ export default {
     NewContractor,
     EmployeeList,
     ContractorList,
+    LocationList,
   },
   created() {
     positionService.list().then((response) => {

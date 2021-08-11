@@ -5,6 +5,7 @@ export default createStore({
     positions: [],
     employees: [],
     contractors: [],
+    locations: [],
   },
   mutations: {
     SET_POSITIONS(state, positions) {
@@ -15,6 +16,9 @@ export default createStore({
     },
     SET_CONTRACTORS(state, contractors) {
       state.contractors = contractors;
+    },
+    SET_LOCATIONS(state, locations) {
+      state.locations = locations;
     }
   },
   actions: {

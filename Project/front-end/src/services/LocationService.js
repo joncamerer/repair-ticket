@@ -5,15 +5,15 @@ const http = axios.create({
 });
 
 export default {
-    create(employee) {
-        return http.post('/employees', employee);
+    create(location) {
+        return http.post('/locations', location);
     },
 
     list() {
-        return http.get('/employees');
+        return http.get('/locations');
     },
 
     get(id) {
-        return http.get(`/employees/${id}`);
+        return http.get(`/locations/${id}`);
     }
 }
