@@ -22,13 +22,13 @@ CREATE TABLE contact (
 
 CREATE TABLE location (
         location_id SERIAL PRIMARY KEY,
-        name varchar(50) NOT NULL,
+        name varchar(50) UNIQUE NOT NULL,
         address_id integer REFERENCES address
 );
 
 CREATE TABLE position (
         position_id SERIAL PRIMARY KEY,
-        name varchar(50) NOT NULL
+        name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE employee (
@@ -51,7 +51,7 @@ CREATE TABLE contractor (
 
 CREATE TABLE service_category (
         service_category_id SERIAL PRIMARY KEY,
-        name varchar(50) NOT NULL
+        name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE contractor_service_category (
@@ -62,14 +62,14 @@ CREATE TABLE contractor_service_category (
 
 CREATE TABLE equipment_category (
         equipment_category_id SERIAL PRIMARY KEY,
-        name varchar(25) NOT NULL
+        name varchar(25) UNIQUE NOT NULL
 );
 
 CREATE TABLE equipment (
         equipment_id SERIAL PRIMARY KEY,
         brand varchar(50) NOT NULL,
         model varchar(50) NOT NULL,
-        serial_no varchar(50) NOT NULL,
+        serial_no varchar(50),
         equipment_category_id integer REFERENCES equipment_category,
         location_id integer REFERENCES location
 );
