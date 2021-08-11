@@ -34,7 +34,7 @@ public class PositionSqlDAO implements PositionDAO {
         return positions;
     }
 
-    public Position mapRowToPosition(SqlRowSet row) {
+    private Position mapRowToPosition(SqlRowSet row) {
         Position position = new Position();
 
         position.setId(row.getLong("position_id"));

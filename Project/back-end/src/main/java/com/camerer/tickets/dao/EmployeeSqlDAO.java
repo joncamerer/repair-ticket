@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Component
@@ -69,8 +71,28 @@ public class EmployeeSqlDAO implements EmployeeDAO {
     }
 
     @Override
+    public List<Employee> listAll() {
+        List<Employee> employees = new ArrayList<>();
+        String sql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
+                "a.city, a.state, a.zip_code, e.hire_date, p.name AS position " +
+                "FROM employee e " +
+                "JOIN contact c ON c.contact_id = e.contact_id " +
+                "JOIN address a ON a.address_id = c.address_id " +
+                "JOIN position p ON p.position_id = e.position_id ";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+        while (results.next()) {
+            Employee employee = mapRowToEmployee(results);
+            employees.add(employee);
+        }
+
+        return employees;
+    }
+
+    @Override
     public Employee getEmployeeById(long id) throws EmployeeNotFoundException {
-        String sql = "SELECT c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
+        String sql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
                             "a.city, a.state, a.zip_code, e.hire_date, p.name AS position " +
                         "FROM employee e " +
                         "JOIN contact c ON c.contact_id = e.contact_id " +
@@ -81,18 +103,16 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 
         if (result.next()) {
-            Employee employee = mapRowToEmployee(result);
-            employee.setId(id);
-
-            return employee;
+            return mapRowToEmployee(result);
         }
 
         throw new EmployeeNotFoundException();
     }
 
-    public Employee mapRowToEmployee(SqlRowSet row) {
+    private Employee mapRowToEmployee(SqlRowSet row) {
         Employee employee = new Employee();
 
+        employee.setId(row.getLong("employee_id"));
         employee.setFirstName(row.getString("first_name"));
         employee.setLastName(row.getString("last_name"));
         employee.setEmail(row.getString("email"));

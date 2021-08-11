@@ -41,7 +41,7 @@ public class TicketSqlDAO implements TicketDAO {
         return tickets;
     }
 
-    public Ticket mapRowToTicket(SqlRowSet row) {
+    private Ticket mapRowToTicket(SqlRowSet row) {
         Ticket ticket = new Ticket();
 
         ticket.setId(row.getLong("ticket_id"));

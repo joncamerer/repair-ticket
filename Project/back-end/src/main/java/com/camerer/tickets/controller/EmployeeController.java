@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,6 +21,11 @@ public class EmployeeController {
     @RequestMapping(path = "/employees", method = RequestMethod.POST)
     public void create(@Valid @RequestBody Employee employee){
         employeeSqlDAO.create(employee);
+    }
+
+    @RequestMapping(path = "/employees", method = RequestMethod.GET)
+    public List<Employee> listAll() {
+        return employeeSqlDAO.listAll();
     }
 
     @RequestMapping(path = "/employees/{id}", method = RequestMethod.GET)
