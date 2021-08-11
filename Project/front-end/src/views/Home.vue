@@ -11,7 +11,7 @@ import EmployeeList from "@/components/lists/EmployeeList";
 import ContractorList from "@/components/lists/ContractorList";
 import LocationList from "@/components/lists/LocationList";
 
-import positionService from "@/services/PositionService";
+import categoryService from "@/services/CategoryService";
 
 export default {
   name: "Home",
@@ -21,9 +21,21 @@ export default {
     LocationList,
   },
   created() {
-    positionService.list().then((response) => {
+    categoryService.listPositions().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_POSITIONS", response.data);
+      }
+    });
+
+    categoryService.listServiceCategories().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_SERVICE_CATEGORIES", response.data);
+      }
+    });
+
+    categoryService.listEquipmentCategories().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_EQUIPMENT_CATEGORIES", response.data);
       }
     });
   },
