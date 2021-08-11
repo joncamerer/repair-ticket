@@ -1,7 +1,17 @@
 <template>
   <div id="location-list">
-    <h1>Location List</h1>
     <div>
+      <h1>Location List</h1>
+      <button type="button" v-on:click="toggleShowForm()">
+        {{ showForm ? "-" : "+" }}
+      </button>
+    </div>
+
+    <div v-if="showForm">
+      <new-location v-on:hideForm="toggleShowForm()" />
+    </div>
+
+    <div v-else>
       <location-summary
         v-for="location in locations"
         :key="location.id"
@@ -12,17 +22,20 @@
 </template>
 
 <script>
+import NewLocation from "@/components/forms/NewLocation";
 import LocationSummary from "@/components/profiles/LocationSummary";
 
 import locationService from "@/services/LocationService";
 
 export default {
   components: {
+    NewLocation,
     LocationSummary,
   },
   data() {
     return {
       locations: [],
+      showForm: false,
     };
   },
   created() {
@@ -32,6 +45,11 @@ export default {
         this.locations = this.$store.state.locations;
       }
     });
+  },
+  methods: {
+    toggleShowForm() {
+      this.showForm = !this.showForm;
+    },
   },
 };
 </script>

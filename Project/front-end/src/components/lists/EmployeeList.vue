@@ -1,7 +1,15 @@
 <template>
   <div id="employee-list">
     <h1>Employee List</h1>
-    <div>
+    <button type="button" v-on:click="toggleShowForm()">
+      {{ showForm ? "-" : "+" }}
+    </button>
+
+    <div v-if="showForm">
+      <new-employee v-on:hideForm="toggleShowForm()" />
+    </div>
+
+    <div v-else>
       <employee-summary
         v-for="employee in employees"
         v-bind:key="employee.id"
@@ -12,17 +20,20 @@
 </template>
 
 <script>
+import NewEmployee from "@/components/forms/NewEmployee";
 import EmployeeSummary from "@/components/profiles/EmployeeSummary";
 
 import employeeService from "@/services/EmployeeService";
 
 export default {
   components: {
+    NewEmployee,
     EmployeeSummary,
   },
   data() {
     return {
       employees: [],
+      showForm: false,
     };
   },
   created() {
@@ -32,6 +43,11 @@ export default {
         this.employees = this.$store.state.employees;
       }
     });
+  },
+  methods: {
+    toggleShowForm() {
+      this.showForm = !this.showForm;
+    },
   },
 };
 </script>
