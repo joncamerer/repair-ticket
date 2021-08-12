@@ -27,7 +27,9 @@
             :key="equipment.id"
             :value="equipment.id"
           >
-            {{ equipment.brand }} {{ equipment.model }}
+            {{ equipment.brand }} {{ equipment.model }} --{{
+              equipment.serialNumber
+            }}
           </option>
         </select>
       </div>
@@ -101,10 +103,7 @@ export default {
   computed: {
     filteredEquipment() {
       return this.$store.state.equipment.filter((equipment) => {
-        if (
-          !this.newTicket.locationId ||
-          equipment.locationId === this.newTicket.locationId
-        ) {
+        if (equipment.locationId === this.newTicket.locationId) {
           return equipment;
         }
       });

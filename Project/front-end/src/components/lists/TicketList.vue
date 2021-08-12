@@ -49,7 +49,6 @@ export default {
     equipmentService.list().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_EQUIPMENT", response.data);
-        this.equipment = this.$store.state.equipment;
       }
     });
     ticketService.list().then((response) => {

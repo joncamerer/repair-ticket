@@ -9,19 +9,12 @@ import TicketList from "@/components/lists/TicketList.vue";
 
 import categoryService from "@/services/CategoryService";
 
-import locationService from "@/services/LocationService";
-
 export default {
   name: "Tickets",
   components: {
     TicketList,
   },
   created() {
-    locationService.list().then((response) => {
-      if (response.status === 200) {
-        this.$store.commit("SET_LOCATIONS", response.data);
-      }
-    });
     categoryService.listPositions().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_POSITIONS", response.data);
