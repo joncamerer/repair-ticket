@@ -7,7 +7,9 @@
       </button>
     </div>
 
-    <div v-if="showForm">FORM</div>
+    <div v-if="showForm">
+      <new-ticket v-on:hideForm="toggleShowForm()" />
+    </div>
 
     <div v-else>
       <ticket-summary
@@ -20,12 +22,16 @@
 </template>
 
 <script>
+import NewTicket from "@/components/forms/NewTicket";
 import TicketSummary from "@/components/profiles/TicketSummary.vue";
 
 import ticketService from "@/services/TicketService";
 
 export default {
-  components: { TicketSummary },
+  components: {
+    NewTicket,
+    TicketSummary,
+  },
   data() {
     return {
       tickets: [],
