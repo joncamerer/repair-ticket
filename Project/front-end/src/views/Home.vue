@@ -3,6 +3,7 @@
     <employee-list />
     <contractor-list />
     <location-list />
+    <equipment-list />
   </div>
 </template>
 
@@ -10,6 +11,7 @@
 import EmployeeList from "@/components/lists/EmployeeList";
 import ContractorList from "@/components/lists/ContractorList";
 import LocationList from "@/components/lists/LocationList";
+import EquipmentList from "@/components/lists/EquipmentList.vue";
 
 import categoryService from "@/services/CategoryService";
 
@@ -19,6 +21,7 @@ export default {
     EmployeeList,
     ContractorList,
     LocationList,
+    EquipmentList,
   },
   created() {
     categoryService.listPositions().then((response) => {
