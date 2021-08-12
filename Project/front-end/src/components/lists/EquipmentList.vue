@@ -8,7 +8,7 @@
     </div>
 
     <div v-if="showForm">
-      {{ "FORM" }}
+      <new-equipment v-on:hideForm="toggleShowForm()" />
     </div>
 
     <div v-else>
@@ -22,12 +22,14 @@
 </template>
 
 <script>
+import NewEquipment from "@/components/forms/NewEquipment";
 import EquipmentSummary from "@/components/profiles/EquipmentSummary";
 
 import equipmentService from "@/services/EquipmentService";
 
 export default {
   components: {
+    NewEquipment,
     EquipmentSummary,
   },
   data() {
