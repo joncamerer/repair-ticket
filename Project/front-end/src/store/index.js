@@ -9,6 +9,7 @@ export default createStore({
     contractors: [],
     locations: [],
     equipment: [],
+    tickets: [],
   },
   mutations: {
     SET_POSITIONS(state, positions) {
@@ -31,6 +32,9 @@ export default createStore({
     },
     SET_EQUIPMENT(state, equipment) {
       state.equipment = equipment;
+    },
+    SET_TICKETS(state, tickets) {
+      state.tickets = tickets;
     }
 
   },

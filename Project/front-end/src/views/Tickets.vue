@@ -1,12 +1,16 @@
 <template>
   <div class="tickets">
-    <h1>Repair Tickets</h1>
+    <ticket-list />
   </div>
 </template>
 
 <script>
+import TicketList from "@/components/lists/TicketList.vue";
 export default {
   name: "Tickets",
+  components: {
+    TicketList,
+  },
 };
 </script>
 
