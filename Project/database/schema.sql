@@ -83,7 +83,7 @@ CREATE TABLE ticket (
 	employee_id integer REFERENCES employee,
 	contractor_id integer REFERENCES contractor,
 	estimate bigint,
-	completed_on date,
+	completed_on timestamp,
         active boolean DEFAULT true NOT NULL
 );
 

@@ -43,4 +43,7 @@ INSERT INTO equipment_category (name) VALUES ('HVAC/ Ventilation');
 INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_id) VALUES ('Avantco', 'A-49F-HC', '1000029374TH', 1, 1);
 INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_id) VALUES ('Vulcan', 'VC5ED-11D1', 'S009374564-00034', 4, 1);
 
+INSERT INTO ticket (location_id, equipment_id, service_category_id, description, employee_id, contractor_id, estimate, active)
+        VALUES (1, 1, 1, 'An example description of equipment problem', 1, 1, 150000, true);
+
 COMMIT TRANSACTION;

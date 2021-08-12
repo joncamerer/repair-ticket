@@ -100,7 +100,7 @@
         <label class="hidden-label" for="new-emp-position">Position:</label>
         <select id="new-emp-position" v-model="newEmployee.position">
           <option value="">--Please select a position</option>
-          <option v-for="(position, key) in $store.state.positions" :key="key">
+          <option v-for="position in $store.state.positions" :key="position.id">
             {{ position.name }}
           </option>
         </select>
