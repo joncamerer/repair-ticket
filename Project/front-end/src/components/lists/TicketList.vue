@@ -25,6 +25,8 @@
 import NewTicket from "@/components/forms/NewTicket";
 import TicketSummary from "@/components/profiles/TicketSummary.vue";
 
+import locationService from "@/services/LocationService";
+import equipmentService from "@/services/EquipmentService";
 import ticketService from "@/services/TicketService";
 
 export default {
@@ -39,6 +41,17 @@ export default {
     };
   },
   created() {
+    locationService.list().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_LOCATIONS", response.data);
+      }
+    });
+    equipmentService.list().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_EQUIPMENT", response.data);
+        this.equipment = this.$store.state.equipment;
+      }
+    });
     ticketService.list().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_TICKETS", response.data);

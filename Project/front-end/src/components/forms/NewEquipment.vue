@@ -38,11 +38,12 @@
         <label class="hidden-label" id="new-eqp-eqp-cat"
           >Equipment Category:</label
         >
-        <select id="new-eqp-eqp-cat" v-model="newEquipment.equipmentCategory">
+        <select id="new-eqp-eqp-cat" v-model="newEquipment.equipmentCategoryId">
           <option value="">--Please select a category</option>
           <option
             v-for="category in $store.state.equipmentCategories"
             :key="category.id"
+            :value="category.id"
           >
             {{ category.name }}
           </option>
@@ -51,20 +52,8 @@
 
       <div class="form-pair">
         <label class="hidden-label" id="new-eqp-location">Location:</label>
-        <select id="new-eqp-location" v-model="newEquipment.location">
+        <select id="new-eqp-location" v-model="newEquipment.locationId">
           <option value="">--Please select a location</option>
-          <option v-for="location in $store.state.locations" :key="location.id">
-            {{ location.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="form-pair">
-        <label class="hidden-label" id="new-eqp-location-test"
-          >Location Test:</label
-        >
-        <select id="new-eqp-location-test" v-model="newEquipment.locationTest">
-          <option value="">--Please select a location TEST</option>
           <option
             v-for="location in $store.state.locations"
             :key="location.id"
@@ -90,8 +79,8 @@ export default {
   data() {
     return {
       newEquipment: {
-        equipmentCategory: "",
-        location: "",
+        equipmentCategoryId: "",
+        locationId: "",
       },
     };
   },

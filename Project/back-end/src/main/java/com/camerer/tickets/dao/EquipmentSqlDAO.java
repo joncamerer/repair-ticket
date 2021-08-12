@@ -29,8 +29,7 @@ public class EquipmentSqlDAO implements EquipmentDAO {
     @Override
     public Equipment create(Equipment equipment) throws EquipmentNotFoundException {
         String sql = "INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_id) " +
-                        "VALUES (?, ?, ?, (SELECT equipment_category_id FROM equipment_category WHERE name = ?), " +
-                                         "(SELECT location_id FROM location WHERE name = ?))";
+                        "VALUES (?, ?, ?, ?, ?)";
         KeyHolder equipmentKey = new GeneratedKeyHolder();
 
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -40,8 +39,8 @@ public class EquipmentSqlDAO implements EquipmentDAO {
                 ps.setString(1, equipment.getBrand());
                 ps.setString(2, equipment.getModel());
                 ps.setString(3, equipment.getSerialNumber());
-                ps.setString(4, equipment.getEquipmentCategory());
-                ps.setString(5, equipment.getLocation());
+                ps.setLong(4, equipment.getEquipmentCategoryId());
+                ps.setLong(5, equipment.getLocationId());
 
                 return ps;
             }
@@ -54,10 +53,10 @@ public class EquipmentSqlDAO implements EquipmentDAO {
     public List<Equipment> listAll() {
         List<Equipment> equipment = new ArrayList<>();
         String sql = "SELECT equipment_id, brand, model, serial_no, " +
-                            "ec.name AS equipment_category, l.name AS location " +
+                            "ec.equipment_category_id, l.location_id " +
                         "FROM equipment e " +
                         "JOIN equipment_category ec ON ec.equipment_category_id = e.equipment_category_id " +
-                        "JOIN location l ON l.location_id = e.location_id";
+                        "JOIN location l ON l.location_id = e.location_id ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -72,7 +71,7 @@ public class EquipmentSqlDAO implements EquipmentDAO {
     @Override
     public Equipment getEquipmentById(long id) throws EquipmentNotFoundException {
         String sql = "SELECT equipment_id, brand, model, serial_no, " +
-                            "ec.name AS equipment_category, l.name AS location " +
+                            "ec.equipment_category_id, l.location_id " +
                         "FROM equipment e " +
                         "JOIN equipment_category ec ON ec.equipment_category_id = e.equipment_category_id " +
                         "JOIN location l ON l.location_id = e.location_id " +
@@ -94,8 +93,8 @@ public class EquipmentSqlDAO implements EquipmentDAO {
         equipment.setBrand(row.getString("brand"));
         equipment.setModel(row.getString("model"));
         equipment.setSerialNumber(row.getString("serial_no"));
-        equipment.setEquipmentCategory(row.getString("equipment_category"));
-        equipment.setLocation(row.getString("location"));
+        equipment.setEquipmentCategoryId(row.getLong("equipment_category_id"));
+        equipment.setLocationId(row.getLong("location_id"));
 
         return equipment;
     }

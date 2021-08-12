@@ -10,21 +10,21 @@ public class Equipment {
     @NotBlank(message = "model is required")
     private String model;
     private String serialNumber;
-    private String equipmentCategory;
-    private String location;
+    private long equipmentCategoryId;
+    private long locationId;
 
     public Equipment() {
 
     }
 
-    public Equipment(long id, String brand, String model, String serialNumber, String equipmentCategory,
-                     String location) {
+    public Equipment(long id, String brand, String model, String serialNumber, long equipmentCategoryId,
+                     long locationId) {
         this.id = id;
         this.brand = brand;
         this.model = model;
         this.serialNumber = serialNumber;
-        this.equipmentCategory = equipmentCategory;
-        this.location = location;
+        this.equipmentCategoryId = equipmentCategoryId;
+        this.locationId = locationId;
     }
 
     public long getId() {
@@ -59,19 +59,19 @@ public class Equipment {
         this.serialNumber = serialNumber;
     }
 
-    public String getEquipmentCategory() {
-        return equipmentCategory;
+    public long getEquipmentCategoryId() {
+        return equipmentCategoryId;
     }
 
-    public void setEquipmentCategory(String equipmentCategory) {
-        this.equipmentCategory = equipmentCategory;
+    public void setEquipmentCategoryId(long equipmentCategoryId) {
+        this.equipmentCategoryId = equipmentCategoryId;
     }
 
-    public String getLocation() {
-        return location;
+    public long getLocationId() {
+        return locationId;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocationId(long locationId) {
+        this.locationId = locationId;
     }
 }

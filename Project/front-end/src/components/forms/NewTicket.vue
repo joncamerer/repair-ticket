@@ -6,6 +6,13 @@
         <label class="hidden-label" for="new-ticket-location">Location:</label>
         <select id="new-ticket-location" v-model="newTicket.locationId">
           <option value="">--Please select a location</option>
+          <option
+            v-for="location in $store.state.locations"
+            :key="location.id"
+            :value="location.id"
+          >
+            {{ location.name }}
+          </option>
         </select>
       </div>
 
@@ -15,6 +22,13 @@
         >
         <select id="new-ticket-equipment" v-model="newTicket.equipmentId">
           <option value="">--Please select an equipment</option>
+          <option
+            v-for="equipment in filteredEquipment"
+            :key="equipment.id"
+            :value="equipment.id"
+          >
+            {{ equipment.brand }} {{ equipment.model }}
+          </option>
         </select>
       </div>
 
@@ -24,6 +38,13 @@
         >
         <select id="new-ticket-category" v-model="newTicket.serviceCategoryId">
           <option value="">--Please select a service category</option>
+          <option
+            v-for="category in $store.state.serviceCategories"
+            :key="category.id"
+            :value="category.id"
+          >
+            {{ category.name }}
+          </option>
         </select>
       </div>
 
@@ -76,6 +97,18 @@ export default {
         contractorId: "",
       },
     };
+  },
+  computed: {
+    filteredEquipment() {
+      return this.$store.state.equipment.filter((equipment) => {
+        if (
+          !this.newTicket.locationId ||
+          equipment.locationId === this.newTicket.locationId
+        ) {
+          return equipment;
+        }
+      });
+    },
   },
   methods: {
     addTicket() {
