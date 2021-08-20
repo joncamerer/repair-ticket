@@ -65,6 +65,15 @@
         >
         <select id="new-ticket-contractor" v-model="newTicket.contractorId">
           <option value="">--Please select a contractor</option>
+          <option
+            v-for="contractor in filteredContractors"
+            :key="contractor.id"
+            :value="contractor.id"
+          >
+            {{ contractor.firstName }}
+            {{ contractor.lastName }} --
+            {{ contractor.phone }}
+          </option>
         </select>
       </div>
 
@@ -88,6 +97,8 @@
 </template>
 
 <script>
+import ticketService from "@/services/TicketService";
+
 export default {
   data() {
     return {
@@ -108,10 +119,25 @@ export default {
         }
       });
     },
+    filteredContractors() {
+      return this.$store.state.contractors.filter((contractor) => {
+        if (
+          contractor.serviceCategoryIds.includes(
+            this.newTicket.serviceCategoryId
+          )
+        ) {
+          return contractor;
+        }
+      });
+    },
   },
   methods: {
     addTicket() {
-      this.$router.go();
+      ticketService.create(this.newTicket).then((response) => {
+        if (response.status === 201) {
+          this.$router.go();
+        }
+      });
     },
     hideForm() {
       this.$emit("hideForm");

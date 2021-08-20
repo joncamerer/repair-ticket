@@ -73,6 +73,10 @@ public class ContractorSqlDAO implements ContractorDAO {
 
         while (results.next()) {
             Contractor contractor = mapRowToContractor(results);
+            String serviceCategorySql = "SELECT service_category_id FROM contractor_service_category " +
+                    "WHERE contractor_id = " + contractor.getId();
+
+            contractor.setServiceCategoryIds(jdbcTemplate.queryForList(serviceCategorySql, Long.class));
             contractors.add(contractor);
         }
 
@@ -81,17 +85,22 @@ public class ContractorSqlDAO implements ContractorDAO {
 
     @Override
     public Contractor getContractorById(long id) throws ContractorNotFoundException {
-        String sql = "SELECT ct.contractor_id, c.first_name, c.last_name, c.email, c.phone, " +
+        String contractorSql = "SELECT ct.contractor_id, c.first_name, c.last_name, c.email, c.phone, " +
                             "a.street_no, a.street_name, a.city, a.state, a.zip_code " +
                         "FROM contractor ct " +
                         "JOIN contact c ON c.contact_id = ct.contact_id " +
                         "JOIN address a ON a.address_id = c.address_id " +
                         "WHERE contractor_id = ?";
+        String serviceCategorySql = "SELECT service_category_id FROM contractor_service_category " +
+                                        "WHERE contractor_id = " + id;
 
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+        SqlRowSet contractorResult = jdbcTemplate.queryForRowSet(contractorSql, id);
 
-        if (result.next()) {
-            return mapRowToContractor(result);
+        if (contractorResult.next()) {
+            Contractor thisContractor = mapRowToContractor(contractorResult);
+            thisContractor.setServiceCategoryIds(jdbcTemplate.queryForList(serviceCategorySql, Long.class));
+
+            return thisContractor;
         }
 
         throw new ContractorNotFoundException();

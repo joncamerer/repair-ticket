@@ -6,7 +6,7 @@ const http = axios.create({
 
 export default {
     create(ticket) {
-        return http.post('/tickets'), ticket
+        return http.post('/tickets', ticket);
     },
 
     list() {

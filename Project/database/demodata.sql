@@ -3,9 +3,16 @@ BEGIN TRANSACTION;
 INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (7531, 'N. Damen Ave', 'Chicago', 'Illinois', 60645);
 INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (352, 'N. Clark St', 'Chicago', 'Illinois', 60654);
 INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (4710, 'N. Dover St', 'Chicago', 'Illinois', 60640);
+INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (658, 'W. 35th St', 'Chicago', 'Illinois', 60616);
+INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (4746, 'S. Ashland Ave', 'Chicago', 'Illinois', 60609);
+INSERT INTO address (street_no, street_name, city, state, zip_code) VALUES (2524, 'W. North Ave', 'Chicago', 'Illinois', 60647);
 
 INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Laura', 'Demoton', 'laura.d@example.com', '312-555-1234', 1);
-INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Roger', 'Contracton', 'roger.handyman@example.com', '312-555-4321', 3);
+
+INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Henry', 'Handyman', 'henry.handyman@example.com', '312-555-4321', 3);
+INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Reggie', 'Cooling', 'coolreggie99@example.com', '312-555-1551', 4);
+INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Perry', 'Plumb', 'pipes.per.perry@example.com', '312-555-1999', 5);
+INSERT INTO contact (first_name, last_name, email, phone, address_id) VALUES ('Rocky', 'Redson', 'rockysrepairschi@example.com', '312-555-9871', 6);
 
 INSERT INTO location (name, address_id) VALUES ('River North', 2);
 
@@ -20,6 +27,9 @@ INSERT INTO employee (contact_id, position_id, hire_date) VALUES (1, 1, 'jan-01-
 INSERT INTO employee_location (employee_id, location_id) VALUES (1, 1);
 
 INSERT INTO contractor (contact_id) VALUES (2);
+INSERT INTO contractor (contact_id) VALUES (3);
+INSERT INTO contractor (contact_id) VALUES (4);
+INSERT INTO contractor (contact_id) VALUES (5);
 
 INSERT INTO service_category (name) VALUES ('Refrigeration');
 INSERT INTO service_category (name) VALUES ('HVAC');
@@ -32,6 +42,14 @@ INSERT INTO service_category (name) VALUES ('General');
 INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (1, 3);
 INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (1, 4);
 INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (1, 7);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (2, 1);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (2, 2);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (2, 6);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (3, 3);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (4, 3);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (4, 4);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (4, 5);
+INSERT INTO contractor_service_category (contractor_id, service_category_id) VALUES (4, 7);
 
 INSERT INTO equipment_category (name) VALUES ('Refrigeration');
 INSERT INTO equipment_category (name) VALUES ('Plumbing');

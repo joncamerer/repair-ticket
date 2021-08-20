@@ -23,14 +23,14 @@ public class Contractor {
     private String state;
     @Positive(message = "zip code is required")
     private int zipCode;
-    private List<String> serviceCategories;
+    private List<Long> serviceCategoryIds;
 
     public Contractor() {
 
     }
 
     public Contractor(long id, String firstName, String lastName, String email, String phone, long streetNumber,
-                      String streetName, String city, String state, int zipCode, List<String> serviceCategories) {
+                      String streetName, String city, String state, int zipCode, List<Long> serviceCategoryIds) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +41,7 @@ public class Contractor {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
-        this.serviceCategories = serviceCategories;
+        this.serviceCategoryIds = serviceCategoryIds;
     }
 
     public long getId() {
@@ -124,11 +124,11 @@ public class Contractor {
         this.zipCode = zipCode;
     }
 
-    public List<String> getServiceCategories() {
-        return serviceCategories;
+    public List<Long> getServiceCategoryIds() {
+        return serviceCategoryIds;
     }
 
-    public void setServiceCategories(List<String> serviceCategories) {
-        this.serviceCategories = serviceCategories;
+    public void setServiceCategoryIds(List<Long> serviceCategoryIds) {
+        this.serviceCategoryIds = serviceCategoryIds;
     }
 }

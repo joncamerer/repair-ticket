@@ -27,6 +27,7 @@ import TicketSummary from "@/components/profiles/TicketSummary.vue";
 
 import locationService from "@/services/LocationService";
 import equipmentService from "@/services/EquipmentService";
+import contractorService from "@/services/ContractorService";
 import ticketService from "@/services/TicketService";
 
 export default {
@@ -49,6 +50,11 @@ export default {
     equipmentService.list().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_EQUIPMENT", response.data);
+      }
+    });
+    contractorService.list().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_CONTRACTORS", response.data);
       }
     });
     ticketService.list().then((response) => {
