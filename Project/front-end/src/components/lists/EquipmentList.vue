@@ -7,7 +7,7 @@
       </button>
     </div>
 
-    <div v-if="showForm">
+    <div v-if="showForm" id="equipment-list-form">
       <new-equipment v-on:hideForm="toggleShowForm()" />
     </div>
 
@@ -59,6 +59,11 @@ export default {
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+#equipment-list-form {
+  display: flex;
+  flex-grow: 1;
 }
 
 #equipment-list-scroll {
