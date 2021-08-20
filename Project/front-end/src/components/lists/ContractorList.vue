@@ -55,4 +55,9 @@ export default {
 </script>
 
 <style>
+#contractor-list {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+}
 </style>

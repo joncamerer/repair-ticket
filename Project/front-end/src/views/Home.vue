@@ -1,9 +1,13 @@
 <template>
   <div id="home">
-    <employee-list />
-    <contractor-list />
-    <location-list />
-    <equipment-list />
+    <div id="home-body">
+      <employee-list />
+      <contractor-list />
+    </div>
+    <div id="home-foot">
+      <location-list />
+      <equipment-list />
+    </div>
   </div>
 </template>
 
@@ -46,7 +50,25 @@ export default {
 </script>
 
 <style>
-.list-title-button {
+#home {
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#home-body {
+  display: flex;
+  flex-grow: 3;
+}
+
+#home-foot {
+  display: flex;
+  flex-grow: 1;
+}
+
+#home-sidebar {
+  display: flex;
+
+  width: 30%;
 }
 </style>

@@ -11,7 +11,7 @@
       <new-employee v-on:hideForm="toggleShowForm()" />
     </div>
 
-    <div v-else>
+    <div v-else id="employee-list-scroll">
       <employee-summary
         v-for="employee in employees"
         v-bind:key="employee.id"
@@ -55,4 +55,13 @@ export default {
 </script>
 
 <style>
+#employee-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+}
+
+#employee-list-scroll {
+  overflow: scroll;
+}
 </style>

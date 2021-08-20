@@ -11,7 +11,7 @@
       <new-equipment v-on:hideForm="toggleShowForm()" />
     </div>
 
-    <div v-else>
+    <div v-else id="equipment-list-scroll">
       <equipment-summary
         v-for="item in equipment"
         :key="item.id"
@@ -55,4 +55,13 @@ export default {
 </script>
 
 <style>
+#equipment-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#equipment-list-scroll {
+  overflow: scroll;
+}
 </style>

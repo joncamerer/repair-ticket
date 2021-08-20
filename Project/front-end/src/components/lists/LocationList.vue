@@ -11,7 +11,7 @@
       <new-location v-on:hideForm="toggleShowForm()" />
     </div>
 
-    <div v-else>
+    <div v-else id="location-list-scroll">
       <location-summary
         v-for="location in locations"
         :key="location.id"
@@ -55,4 +55,13 @@ export default {
 </script>
 
 <style>
+#location-list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#location-list-scroll {
+  overflow: scroll;
+}
 </style>
