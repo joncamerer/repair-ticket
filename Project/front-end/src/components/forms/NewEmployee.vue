@@ -1,118 +1,125 @@
 <template>
   <div id="new-employee">
-    <h1>Create New Employee</h1>
-    <form v-on:submit.prevent="addEmployee()">
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-first-name">First Name:</label>
-        <input
-          id="new-emp-first-name"
-          type="text"
-          placeholder="First Name"
-          v-model="newEmployee.firstName"
-        />
-      </div>
+    <h1 class="form-title">New Employee</h1>
+    <form v-on:submit.prevent="addEmployee()" id="new-employee-form">
+      <div id="new-employee-form-inputs">
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-first-name"
+            >First Name:</label
+          >
+          <input
+            id="new-emp-first-name"
+            type="text"
+            placeholder="First Name"
+            v-model="newEmployee.firstName"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-last-name">Last Name:</label>
-        <input
-          id="new-emp-last-name"
-          type="text"
-          placeholder="Last Name"
-          v-model="newEmployee.lastName"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-last-name">Last Name:</label>
+          <input
+            id="new-emp-last-name"
+            type="text"
+            placeholder="Last Name"
+            v-model="newEmployee.lastName"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-email">Email:</label>
-        <input
-          id="new-emp-email"
-          type="email"
-          placeholder="Email"
-          v-model="newEmployee.email"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-email">Email:</label>
+          <input
+            id="new-emp-email"
+            type="email"
+            placeholder="Email"
+            v-model="newEmployee.email"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-phone">Phone Number:</label>
-        <input
-          id="new-emp-phone"
-          type="tel"
-          placeholder="Phone Number"
-          v-model="newEmployee.phone"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-phone">Phone Number:</label>
+          <input
+            id="new-emp-phone"
+            type="tel"
+            placeholder="Phone Number"
+            v-model="newEmployee.phone"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-street-no"
-          >Street Number:</label
-        >
-        <input
-          id="new-emp-street-no"
-          type="text"
-          placeholder="Street Number"
-          v-model="newEmployee.streetNumber"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-street-no"
+            >Street Number:</label
+          >
+          <input
+            id="new-emp-street-no"
+            type="text"
+            placeholder="Street Number"
+            v-model="newEmployee.streetNumber"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-street-name"
-          >Street Name:</label
-        >
-        <input
-          id="new-emp-street-name"
-          type="text"
-          placeholder="Street Name"
-          v-model="newEmployee.streetName"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-street-name"
+            >Street Name:</label
+          >
+          <input
+            id="new-emp-street-name"
+            type="text"
+            placeholder="Street Name"
+            v-model="newEmployee.streetName"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-city">City:</label>
-        <input
-          id="new-emp-city"
-          type="text"
-          placeholder="City"
-          v-model="newEmployee.city"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-city">City:</label>
+          <input
+            id="new-emp-city"
+            type="text"
+            placeholder="City"
+            v-model="newEmployee.city"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-state">State:</label>
-        <input
-          id="new-emp-state"
-          type="text"
-          placeholder="State"
-          v-model="newEmployee.state"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-state">State:</label>
+          <input
+            id="new-emp-state"
+            type="text"
+            placeholder="State"
+            v-model="newEmployee.state"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-zip-code">Zip Code:</label>
-        <input
-          id="new-emp-zip-code"
-          type="text"
-          placeholder="Zip Code"
-          v-model="newEmployee.zipCode"
-        />
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-zip-code">Zip Code:</label>
+          <input
+            id="new-emp-zip-code"
+            type="text"
+            placeholder="Zip Code"
+            v-model="newEmployee.zipCode"
+          />
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-position">Position:</label>
-        <select id="new-emp-position" v-model="newEmployee.position">
-          <option value="">--Please select a position</option>
-          <option v-for="position in $store.state.positions" :key="position.id">
-            {{ position.name }}
-          </option>
-        </select>
-      </div>
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-position">Position:</label>
+          <select id="new-emp-position" v-model="newEmployee.position">
+            <option value="">--Please select a position</option>
+            <option
+              v-for="position in $store.state.positions"
+              :key="position.id"
+            >
+              {{ position.name }}
+            </option>
+          </select>
+        </div>
 
-      <div class="form-pair">
-        <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
-        <input
-          id="new-emp-hire-date"
-          type="date"
-          v-model="newEmployee.hireDate"
-        />
+        <div class="form-pair">
+          <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
+          <input
+            id="new-emp-hire-date"
+            type="date"
+            v-model="newEmployee.hireDate"
+          />
+        </div>
       </div>
 
       <div>
@@ -167,4 +174,24 @@ export default {
 </script>
 
 <style>
+#new-employee {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#new-employee-form {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+#new-employee-form-inputs {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+
+  align-content: space-around;
+  justify-content: space-around;
+}
 </style>

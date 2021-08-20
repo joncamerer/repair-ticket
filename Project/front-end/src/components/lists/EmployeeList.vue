@@ -7,7 +7,7 @@
       </button>
     </div>
 
-    <div v-if="showForm">
+    <div v-if="showForm" id="employee-list-form">
       <new-employee v-on:hideForm="toggleShowForm()" />
     </div>
 
@@ -58,7 +58,13 @@ export default {
 #employee-list {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
+
+  width: 60%;
+}
+
+#employee-list-form {
+  display: flex;
+  flex-grow: 1;
 }
 
 #employee-list-scroll {

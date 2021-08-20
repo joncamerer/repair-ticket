@@ -65,4 +65,13 @@ body {
   height: 2em;
   width: 2em;
 }
+
+.form-title {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.form-pair {
+  display: flex;
+}
 </style>

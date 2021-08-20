@@ -68,7 +68,5 @@ export default {
 
 #home-sidebar {
   display: flex;
-
-  width: 30%;
 }
 </style>

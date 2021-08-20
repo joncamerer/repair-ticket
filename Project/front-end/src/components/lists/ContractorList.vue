@@ -58,6 +58,6 @@ export default {
 #contractor-list {
   display: flex;
   flex-direction: column;
-  width: 30vw;
+  flex-grow: 1;
 }
 </style>
