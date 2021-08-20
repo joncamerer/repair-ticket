@@ -58,7 +58,7 @@ export default {
 #equipment-list {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 50%;
 }
 
 #equipment-list-scroll {

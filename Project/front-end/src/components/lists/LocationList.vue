@@ -7,7 +7,7 @@
       </button>
     </div>
 
-    <div v-if="showForm">
+    <div v-if="showForm" id="location-list-form">
       <new-location v-on:hideForm="toggleShowForm()" />
     </div>
 
@@ -58,6 +58,11 @@ export default {
 #location-list {
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+
+#location-list-form {
+  display: flex;
   flex-grow: 1;
 }
 
