@@ -7,11 +7,11 @@
       </button>
     </div>
 
-    <div v-if="showForm">
+    <div v-if="showForm" id="contractor-list-form">
       <new-contractor v-on:hideForm="toggleShowForm()" />
     </div>
 
-    <div v-else>
+    <div v-else id="contractor-list-scroll">
       <contractor-summary
         v-for="contractor in contractors"
         v-bind:key="contractor.id"
@@ -58,6 +58,16 @@ export default {
 #contractor-list {
   display: flex;
   flex-direction: column;
+
+  width: 40%;
+}
+
+#contractor-list-form {
+  display: flex;
   flex-grow: 1;
+}
+
+#contractor-list-scroll {
+  overflow: scroll;
 }
 </style>

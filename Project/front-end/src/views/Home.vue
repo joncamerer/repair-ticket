@@ -58,12 +58,12 @@ export default {
 
 #home-body {
   display: flex;
-  flex-grow: 3;
+  height: 70%;
 }
 
 #home-foot {
   display: flex;
-  flex-grow: 1;
+  height: 30%;
 }
 
 #home-sidebar {

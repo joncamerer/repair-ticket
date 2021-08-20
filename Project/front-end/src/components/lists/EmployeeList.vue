@@ -59,7 +59,7 @@ export default {
   display: flex;
   flex-direction: column;
 
-  width: 60%;
+  width: 67%;
 }
 
 #employee-list-form {

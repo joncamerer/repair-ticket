@@ -188,8 +188,8 @@ export default {
 
 #new-employee-form-inputs {
   display: flex;
-  flex-grow: 1;
   flex-wrap: wrap;
+  flex-grow: 1;
 
   align-content: space-around;
   justify-content: space-around;
