@@ -1,6 +1,7 @@
 <template>
   <div id="nav">
-    <router-link to="/">Dashboard</router-link> |
+    <router-link to="/login">Log In</router-link> |
+    <router-link to="/dashboard">Dashboard</router-link> |
     <router-link to="/tickets">Tickets</router-link>
   </div>
   <router-view />

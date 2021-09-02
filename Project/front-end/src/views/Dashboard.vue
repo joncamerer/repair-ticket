@@ -21,7 +21,7 @@ import categoryService from "@/services/CategoryService";
 import locationService from "@/services/LocationService";
 
 export default {
-  name: "Home",
+  name: "Dashboard",
   components: {
     EmployeeList,
     ContractorList,

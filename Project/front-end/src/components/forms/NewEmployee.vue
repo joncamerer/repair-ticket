@@ -200,7 +200,13 @@ export default {
       });
     },
     isDistrict() {
-      return true;
+      var isDistrict = false;
+
+      if (isDistrict) {
+        this.newEmployee.locationIds = [""];
+      }
+
+      return isDistrict;
     },
     hideForm() {
       this.$emit("hideForm");
