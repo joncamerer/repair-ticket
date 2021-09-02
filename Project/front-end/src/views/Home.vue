@@ -18,6 +18,7 @@ import LocationList from "@/components/lists/LocationList";
 import EquipmentList from "@/components/lists/EquipmentList.vue";
 
 import categoryService from "@/services/CategoryService";
+import locationService from "@/services/LocationService";
 
 export default {
   name: "Home",
@@ -43,6 +44,12 @@ export default {
     categoryService.listEquipmentCategories().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_EQUIPMENT_CATEGORIES", response.data);
+      }
+    });
+
+    locationService.list().then((response) => {
+      if (response === 200) {
+        this.$store.commit("SET_LOCATIONS", response.data);
       }
     });
   },

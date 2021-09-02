@@ -112,6 +112,37 @@
           </select>
         </div>
 
+        <div class="form-pair" v-if="isDistrict()">
+          <label class="hidden-label">Location:</label>
+          <select
+            id="new-employee-location"
+            v-model="newEmployee.locationIds"
+            multiple
+          >
+            <option
+              v-for="location in $store.state.locations"
+              :key="location.id"
+              :value="[location.id]"
+            >
+              {{ location.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-pair" v-else>
+          <label class="hidden-label">Location:</label>
+          <select id="new-employee-location" v-model="newEmployee.locationIds">
+            <option value="">--Please select a location</option>
+            <option
+              v-for="location in $store.state.locations"
+              :key="location.id"
+              :value="[location.id]"
+            >
+              {{ location.name }}
+            </option>
+          </select>
+        </div>
+
         <div class="form-pair">
           <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
           <input
@@ -139,6 +170,7 @@ export default {
       newEmployee: {
         position: "",
         hireDate: "",
+        locationIds: "",
       },
     };
   },
@@ -165,6 +197,9 @@ export default {
           this.$router.go();
         }
       });
+    },
+    isDistrict() {
+      return false;
     },
     hideForm() {
       this.$emit("hideForm");
