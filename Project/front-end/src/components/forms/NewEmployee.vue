@@ -114,7 +114,7 @@
         </div>
 
         <div class="form-pair" v-if="isDistrict()">
-          <label class="hidden-label">Location:</label>
+          <label class="hidden-label">Locations:</label>
           <select
             id="new-employee-location"
             v-model="newEmployee.locationIds"
@@ -123,7 +123,7 @@
             <option
               v-for="location in $store.state.locations"
               :key="location.id"
-              :value="[location.id]"
+              :value="location.id"
             >
               {{ location.name }}
             </option>
@@ -200,7 +200,7 @@ export default {
       });
     },
     isDistrict() {
-      return false;
+      return true;
     },
     hideForm() {
       this.$emit("hideForm");

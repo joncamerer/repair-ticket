@@ -98,6 +98,23 @@
             v-model="newContractor.zipCode"
           />
         </div>
+
+        <div class="form-pair">
+          <label class="hidden-label">Service Categories:</label>
+          <select
+            id="new-contractor-service-categories"
+            v-model="newContractor.serviceCategoryIds"
+            multiple
+          >
+            <option
+              v-for="serviceCategory in $store.state.serviceCategories"
+              :key="serviceCategory.id"
+              :value="serviceCategory.id"
+            >
+              {{ serviceCategory.name }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>
@@ -114,7 +131,9 @@ import contractorService from "@/services/ContractorService";
 export default {
   data() {
     return {
-      newContractor: {},
+      newContractor: {
+        serviceCategoryIds: [],
+      },
     };
   },
   methods: {
