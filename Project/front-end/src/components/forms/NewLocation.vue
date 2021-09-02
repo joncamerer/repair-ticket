@@ -48,13 +48,17 @@
         </div>
 
         <div class="form-pair">
-          <label class="hidden-label" for="new-loc-state">State:</label>
-          <input
-            id="new-loc-state"
-            type="text"
-            placeholder="State"
-            v-model="newLocation.state"
-          />
+          <label class="hidden-label" for="new-emp-loc-select">State:</label>
+          <select id="new-loc-state-select" v-model="newLocation.state">
+            <option value="">--Please select a State</option>
+            <option
+              v-for="state in $store.state.usStates"
+              :key="state.id"
+              :value="state.name"
+            >
+              {{ state.name }}
+            </option>
+          </select>
         </div>
 
         <div class="form-pair">
@@ -82,7 +86,9 @@ import locationService from "@/services/LocationService";
 export default {
   data() {
     return {
-      newLocation: {},
+      newLocation: {
+        state: "",
+      },
     };
   },
   methods: {

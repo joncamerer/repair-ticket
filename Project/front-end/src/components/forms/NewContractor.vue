@@ -80,13 +80,17 @@
         </div>
 
         <div class="form-pair">
-          <label class="hidden-label" for="new-ctr-state">State:</label>
-          <input
-            id="new-ctr-state"
-            type="text"
-            placeholder="State"
-            v-model="newContractor.state"
-          />
+          <label class="hidden-label" for="new-ctr-state-select">State:</label>
+          <select id="new-ctr-state-select" v-model="newContractor.state">
+            <option value="">--Please select a State</option>
+            <option
+              v-for="state in $store.state.usStates"
+              :key="state.id"
+              :value="state.name"
+            >
+              {{ state.name }}
+            </option>
+          </select>
         </div>
 
         <div class="form-pair">
@@ -99,21 +103,25 @@
           />
         </div>
 
-        <div class="form-pair">
-          <label class="hidden-label">Service Categories:</label>
-          <select
-            id="new-contractor-service-categories"
-            v-model="newContractor.serviceCategoryIds"
-            multiple
+        <div id="service-category-box">
+          <div
+            class="service-category-pair"
+            v-for="serviceCategory in $store.state.serviceCategories"
+            :key="serviceCategory.id"
           >
-            <option
-              v-for="serviceCategory in $store.state.serviceCategories"
-              :key="serviceCategory.id"
-              :value="serviceCategory.id"
+            <label
+              class="service-category-label"
+              :for="'service-category-' + serviceCategory.id"
+              >{{ serviceCategory.name }}</label
             >
-              {{ serviceCategory.name }}
-            </option>
-          </select>
+            <input
+              :id="'service-category-' + serviceCategory.id"
+              class="service-category-check"
+              type="checkbox"
+              v-model="newContractor.serviceCategoryIds"
+              :value="serviceCategory.id"
+            />
+          </div>
         </div>
       </div>
 
@@ -132,6 +140,7 @@ export default {
   data() {
     return {
       newContractor: {
+        state: "",
         serviceCategoryIds: [],
       },
     };
@@ -171,5 +180,22 @@ export default {
 
   align-content: space-around;
   justify-content: space-around;
+}
+
+#service-category-box {
+  max-height: 3rem;
+  overflow: scroll;
+}
+
+.service-category-pair {
+  display: flex;
+}
+
+.service-category-label {
+  order: 2;
+}
+
+.service-category-check {
+  order: 1;
 }
 </style>
