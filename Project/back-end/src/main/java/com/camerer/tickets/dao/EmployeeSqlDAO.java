@@ -52,7 +52,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(sql, new String[] {"employee_id"});
                 ps.setLong(1, contactId);
-                ps.setString(2, employee.getPosition());
+                ps.setLong(2, employee.getPositionId());
                 ps.setObject(3, employee.getHireDate());
 
                 return ps;
@@ -66,11 +66,10 @@ public class EmployeeSqlDAO implements EmployeeDAO {
     public List<Employee> listAll() {
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
-                            "a.city, a.state, a.zip_code, e.hire_date, p.name AS position " +
+                            "a.city, a.state, a.zip_code, e.hire_date, e.position_id " +
                         "FROM employee e " +
                         "JOIN contact c ON c.contact_id = e.contact_id " +
-                        "JOIN address a ON a.address_id = c.address_id " +
-                        "JOIN position p ON p.position_id = e.position_id ";
+                        "JOIN address a ON a.address_id = c.address_id ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -87,13 +86,12 @@ public class EmployeeSqlDAO implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeById(long id) throws EmployeeNotFoundException {
-        String employeeSql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
-                            "a.city, a.state, a.zip_code, e.hire_date, p.name AS position " +
-                        "FROM employee e " +
-                        "JOIN contact c ON c.contact_id = e.contact_id " +
-                        "JOIN address a ON a.address_id = c.address_id " +
-                        "JOIN position p ON p.position_id = e.position_id " +
-                        "WHERE employee_id = ?";
+        String employeeSql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, " +
+                                    "a.street_name, a.city, a.state, a.zip_code, e.hire_date, e.position_id " +
+                                "FROM employee e " +
+                                "JOIN contact c ON c.contact_id = e.contact_id " +
+                                "JOIN address a ON a.address_id = c.address_id " +
+                                "WHERE employee_id = ?";
         String locationsSql = "SELECT location_id FROM employee_location WHERE employee_id = " + id;
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(employeeSql, id);
@@ -122,7 +120,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         employee.setState(row.getString("state"));
         employee.setZipCode(row.getInt("zip_code"));
         employee.setHireDate(row.getDate("hire_date").toLocalDate());
-        employee.setPosition(row.getString("position"));
+        employee.setPositionId(row.getLong("position_id"));
 
         return employee;
     }

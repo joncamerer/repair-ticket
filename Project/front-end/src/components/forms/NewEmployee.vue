@@ -101,11 +101,12 @@
 
         <div class="form-pair">
           <label class="hidden-label" for="new-emp-position">Position:</label>
-          <select id="new-emp-position" v-model="newEmployee.position">
+          <select id="new-emp-position" v-model="newEmployee.positionId">
             <option value="">--Please select a position</option>
             <option
               v-for="position in $store.state.positions"
               :key="position.id"
+              :value="position.id"
             >
               {{ position.name }}
             </option>
@@ -168,7 +169,7 @@ export default {
   data() {
     return {
       newEmployee: {
-        position: "",
+        positionId: "",
         hireDate: "",
         locationIds: "",
       },

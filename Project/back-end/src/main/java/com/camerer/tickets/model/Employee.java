@@ -25,8 +25,8 @@ public class Employee {
     private int zipCode;
     @NotNull(message = "hire date is required")
     private LocalDate hireDate;
-    @NotBlank(message = "position is required")
-    private String position;
+    @Positive(message = "position is required")
+    private long positionId;
     private List<Long> locationIds;
 
     public Employee() {
@@ -35,7 +35,7 @@ public class Employee {
 
     public Employee(long id, String firstName, String lastName, long streetNumber, String streetName,
                     String email, String phone, String city, String state, int zipCode, LocalDate hireDate,
-                    String position, List<Long> locationIds) {
+                    long positionId, List<Long> locationIds) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -47,7 +47,7 @@ public class Employee {
         this.state = state;
         this.zipCode = zipCode;
         this.hireDate = hireDate;
-        this.position = position;
+        this.positionId = positionId;
         this.locationIds = locationIds;
     }
 
@@ -139,12 +139,12 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public String getPosition() {
-        return position;
+    public long getPositionId() {
+        return positionId;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPositionId(long positionId) {
+        this.positionId = positionId;
     }
 
     public List<Long> getLocationIds() {
