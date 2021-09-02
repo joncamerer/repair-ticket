@@ -80,13 +80,17 @@
         </div>
 
         <div class="form-pair">
-          <label class="hidden-label" for="new-emp-state">State:</label>
-          <input
-            id="new-emp-state"
-            type="text"
-            placeholder="State"
-            v-model="newEmployee.state"
-          />
+          <label class="hidden-label" for="new-emp-state-select">State:</label>
+          <select id="new-emp-state-select" v-model="newEmployee.state">
+            <option value="">--Please select a State</option>
+            <option
+              v-for="state in $store.state.usStates"
+              :key="state.id"
+              :value="state.name"
+            >
+              {{ state.name }}
+            </option>
+          </select>
         </div>
 
         <div class="form-pair">
@@ -145,7 +149,7 @@
         </div>
 
         <div class="form-pair">
-          <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
+          <label for="new-emp-hire-date">Hire Date:</label>
           <input
             id="new-emp-hire-date"
             type="date"
@@ -169,6 +173,7 @@ export default {
   data() {
     return {
       newEmployee: {
+        state: "",
         positionId: "",
         hireDate: "",
         locationIds: "",
