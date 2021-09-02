@@ -76,6 +76,9 @@ public class EmployeeSqlDAO implements EmployeeDAO {
 
         while (results.next()) {
             Employee employee = mapRowToEmployee(results);
+            String locationsSql = "SELECT location_id FROM employee_location WHERE employee_id = " + employee.getId();
+
+            employee.setLocationIds(jdbcTemplate.queryForList(locationsSql, Long.class));
             employees.add(employee);
         }
 
@@ -84,18 +87,22 @@ public class EmployeeSqlDAO implements EmployeeDAO {
 
     @Override
     public Employee getEmployeeById(long id) throws EmployeeNotFoundException {
-        String sql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
+        String employeeSql = "SELECT e.employee_id, c.first_name, c.last_name, c.email, c.phone, a.street_no, a.street_name, " +
                             "a.city, a.state, a.zip_code, e.hire_date, p.name AS position " +
                         "FROM employee e " +
                         "JOIN contact c ON c.contact_id = e.contact_id " +
                         "JOIN address a ON a.address_id = c.address_id " +
                         "JOIN position p ON p.position_id = e.position_id " +
                         "WHERE employee_id = ?";
+        String locationsSql = "SELECT location_id FROM employee_location WHERE employee_id = " + id;
 
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(employeeSql, id);
 
         if (result.next()) {
-            return mapRowToEmployee(result);
+            Employee employee = mapRowToEmployee(result);
+            employee.setLocationIds(jdbcTemplate.queryForList(locationsSql, Long.class));
+
+            return employee;
         }
 
         throw new EmployeeNotFoundException();
