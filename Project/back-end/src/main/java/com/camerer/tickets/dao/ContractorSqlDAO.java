@@ -37,6 +37,8 @@ public class ContractorSqlDAO implements ContractorDAO {
     @Override
     public Contractor create(Contractor contractor) throws ContractorNotFoundException {
         String sql = "INSERT INTO contractor (contact_id) VALUES (?)";
+        String serviceCategorySql = "INSERT INTO contractor_service_category (contractor_id, service_category_id) " +
+                                        "VALUES (?, ?)";
 
         Address address = new Address(contractor.getStreetNumber(), contractor.getStreetName(), contractor.getCity(),
                                       contractor.getState(), contractor.getZipCode());
@@ -56,6 +58,10 @@ public class ContractorSqlDAO implements ContractorDAO {
                 return ps;
             }
         }, contractorKey);
+
+        for (long serviceCategoryId : contractor.getServiceCategoryIds()) {
+            jdbcTemplate.update(serviceCategorySql, contractorKey.getKey().longValue(), serviceCategoryId);
+        }
 
         return getContractorById(contractorKey.getKey().longValue());
     }
