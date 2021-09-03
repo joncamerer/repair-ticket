@@ -201,15 +201,7 @@ export default {
     };
   },
   created() {
-    var today = new Date();
-    var month = "" + (today.getMonth() + 1);
-    var day = "" + today.getDate();
-    var year = today.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    this.newEmployee.hireDate = [year, month, day].join("-");
+    this.resetHireDate();
   },
   methods: {
     addEmployee() {
@@ -225,11 +217,24 @@ export default {
       employeeService.create(this.newEmployee).then((response) => {
         if (response.status === 201) {
           this.$router.go();
+        } else {
+          this.resetHireDate();
         }
       });
     },
+    resetHireDate() {
+      var today = new Date();
+      var month = "" + (today.getMonth() + 1);
+      var day = "" + today.getDate();
+      var year = today.getFullYear();
+
+      if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
+
+      this.newEmployee.hireDate = [year, month, day].join("-");
+    },
     isDistrict() {
-      var isDistrict = false;
+      var isDistrict = true;
 
       return isDistrict;
     },

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class EmployeeSqlDAO implements EmployeeDAO {
     @Override
     public Employee create(Employee employee) throws EmployeeNotFoundException {
         String sql = "INSERT INTO employee (contact_id, position_id, hire_date) " +
-                        "VALUES (?, (SELECT position_id FROM position WHERE name = ?), ?)";
+                        "VALUES (?, ?, ?)";
+        String locationSql = "INSERT INTO employee_location (employee_id, location_id) VALUES (?, ?)";
         Address address = new Address(employee.getStreetNumber(), employee.getStreetName(), employee.getCity(),
                                       employee.getState(), employee.getZipCode());
         long addressId = addressSqlDAO.create(address).getId();
@@ -53,11 +55,15 @@ public class EmployeeSqlDAO implements EmployeeDAO {
                 PreparedStatement ps = connection.prepareStatement(sql, new String[] {"employee_id"});
                 ps.setLong(1, contactId);
                 ps.setLong(2, employee.getPositionId());
-                ps.setObject(3, employee.getHireDate());
+                ps.setDate(3, Date.valueOf(employee.getHireDate()));
 
                 return ps;
             }
         }, employeeKey);
+
+        for (long locationId : employee.getLocationIds()) {
+            jdbcTemplate.update(locationSql, employeeKey.getKey().longValue(), locationId);
+        }
 
         return getEmployeeById(employeeKey.getKey().longValue());
     }
