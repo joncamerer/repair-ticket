@@ -117,7 +117,7 @@
           </select>
         </div>
 
-        <div class="form-pair" v-if="isDistrict()">
+        <!-- <div class="form-pair">
           <label class="hidden-label">Locations:</label>
           <select
             id="new-employee-location"
@@ -132,6 +132,25 @@
               {{ location.name }}
             </option>
           </select>
+        </div> -->
+
+        <div id="location-box" v-if="isDistrict()">
+          <div
+            class="location-pair"
+            v-for="location in $store.state.locations"
+            :key="location.id"
+          >
+            <label class="location-label" :for="'location-' + location.id">{{
+              location.name
+            }}</label>
+            <input
+              :id="'location-' + location.id"
+              class="location-check"
+              type="checkbox"
+              v-model="multipleIds"
+              :value="location.id"
+            />
+          </div>
         </div>
 
         <div class="form-pair" v-else>
@@ -178,6 +197,7 @@ export default {
         hireDate: "",
         locationIds: "",
       },
+      multipleIds: [],
     };
   },
   created() {
@@ -198,6 +218,10 @@ export default {
         today.getTime() + today.getTimezoneOffset() * 60000
       );
 
+      if (this.newEmployee.locationIds === "") {
+        this.newEmployee.locationIds = this.multipleIds;
+      }
+
       employeeService.create(this.newEmployee).then((response) => {
         if (response.status === 201) {
           this.$router.go();
@@ -206,10 +230,6 @@ export default {
     },
     isDistrict() {
       var isDistrict = false;
-
-      if (isDistrict) {
-        this.newEmployee.locationIds = [""];
-      }
 
       return isDistrict;
     },
