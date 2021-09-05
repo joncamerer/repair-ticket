@@ -167,6 +167,10 @@ export default {
   flex-grow: 1;
 }
 
+#new-contractor input {
+  max-height: 1em;
+}
+
 #new-contractor-form {
   display: flex;
   flex-direction: column;

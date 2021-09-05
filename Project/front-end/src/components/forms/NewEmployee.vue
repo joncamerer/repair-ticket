@@ -117,23 +117,6 @@
           </select>
         </div>
 
-        <!-- <div class="form-pair">
-          <label class="hidden-label">Locations:</label>
-          <select
-            id="new-employee-location"
-            v-model="newEmployee.locationIds"
-            multiple
-          >
-            <option
-              v-for="location in $store.state.locations"
-              :key="location.id"
-              :value="location.id"
-            >
-              {{ location.name }}
-            </option>
-          </select>
-        </div> -->
-
         <div id="location-box" v-if="isDistrict()">
           <div
             class="location-pair"
@@ -154,7 +137,9 @@
         </div>
 
         <div class="form-pair" v-else>
-          <label class="hidden-label">Location:</label>
+          <label class="hidden-label" for="new-employee-location"
+            >Location:</label
+          >
           <select id="new-employee-location" v-model="newEmployee.locationIds">
             <option value="">--Please select a location</option>
             <option
@@ -168,7 +153,7 @@
         </div>
 
         <div class="form-pair">
-          <label for="new-emp-hire-date">Hire Date:</label>
+          <label class="hidden-label" for="new-emp-hire-date">Hire Date:</label>
           <input
             id="new-emp-hire-date"
             type="date"
@@ -234,7 +219,7 @@ export default {
       this.newEmployee.hireDate = [year, month, day].join("-");
     },
     isDistrict() {
-      var isDistrict = true;
+      var isDistrict = false;
 
       return isDistrict;
     },
@@ -252,6 +237,14 @@ export default {
   flex-grow: 1;
 }
 
+#new-employee input {
+  max-height: 1em;
+}
+
+#new-employee select {
+  max-height: 2em;
+}
+
 #new-employee-form {
   display: flex;
   flex-direction: column;
@@ -265,5 +258,14 @@ export default {
 
   align-content: space-around;
   justify-content: space-around;
+}
+
+#location-box {
+  max-height: 3em;
+  overflow: scroll;
+}
+
+#new-emp-hire-date {
+  max-height: 1.5em !important;
 }
 </style>
