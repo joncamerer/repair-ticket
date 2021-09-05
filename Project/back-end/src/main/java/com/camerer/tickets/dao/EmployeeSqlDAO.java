@@ -40,15 +40,17 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         String sql = "INSERT INTO employee (contact_id, position_id, hire_date) " +
                         "VALUES (?, ?, ?)";
         String locationSql = "INSERT INTO employee_location (employee_id, location_id) VALUES (?, ?)";
+        //Create address
         Address address = new Address(employee.getStreetNumber(), employee.getStreetName(), employee.getCity(),
                                       employee.getState(), employee.getZipCode());
         long addressId = addressSqlDAO.create(address).getId();
-
+        //Create contact
         Contact contact = new Contact(employee.getFirstName(), employee.getLastName(), employee.getEmail(),
                                       employee.getPhone(), addressId);
         long contactId = contactSqlDAO.create(contact).getId();
-        KeyHolder employeeKey = new GeneratedKeyHolder();
 
+        //Create employee
+        KeyHolder employeeKey = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -61,6 +63,7 @@ public class EmployeeSqlDAO implements EmployeeDAO {
             }
         }, employeeKey);
 
+        //Create employee_locations
         for (long locationId : employee.getLocationIds()) {
             jdbcTemplate.update(locationSql, employeeKey.getKey().longValue(), locationId);
         }
@@ -82,8 +85,8 @@ public class EmployeeSqlDAO implements EmployeeDAO {
         while (results.next()) {
             Employee employee = mapRowToEmployee(results);
             String locationsSql = "SELECT location_id FROM employee_location WHERE employee_id = " + employee.getId();
-
             employee.setLocationIds(jdbcTemplate.queryForList(locationsSql, Long.class));
+
             employees.add(employee);
         }
 

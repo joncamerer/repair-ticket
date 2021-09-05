@@ -20,7 +20,7 @@ const routes = [
     component: Tickets
   },
   {
-    path: "/",
+    path: "/:pathMatch(.*)*",
     component: Login
   },
 ]
