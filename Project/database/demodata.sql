@@ -91,7 +91,9 @@ INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_
 INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_id) VALUES ('Avantco', 'A-49F-HC', '1000029436TH', 1, 3);
 INSERT INTO equipment (brand, model, serial_no, equipment_category_id, location_id) VALUES ('Vulcan', 'VC5ED-11D1', 'S009374575-00034', 4, 3);
 
-INSERT INTO ticket (location_id, equipment_id, service_category_id, description, employee_id, contractor_id, estimate, active)
-        VALUES (1, 1, 1, 'An example description of equipment problem', 1, 1, 150000, true);
+INSERT INTO ticket (location_id, equipment_id, service_category_id, description, employee_id, contractor_id, estimate, submitted_on)
+        VALUES (1, 1, 1, 'An example description of equipment problem', 1, 1, 150000, 'jun-17-2021');
+INSERT INTO ticket (location_id, equipment_id, service_category_id, description, employee_id, contractor_id, estimate, submitted_on)
+        VALUES (2, 3, 5, 'An example description for routine PM', 1, 1, 7500, 'jun-24-2021');        
 
 COMMIT TRANSACTION;

@@ -83,8 +83,9 @@ CREATE TABLE ticket (
 	employee_id integer REFERENCES employee,
 	contractor_id integer REFERENCES contractor,
 	estimate bigint,
+	submitted_on date NOT NULL,
 	completed_on timestamp,
-        active boolean DEFAULT true NOT NULL
+        active boolean DEFAULT true
 );
 
 CREATE TABLE invoice (
@@ -94,7 +95,7 @@ CREATE TABLE invoice (
         invoice_total bigint NOT NULL,
         due_date date NOT NULL,
         paid_date date,
-        active boolean DEFAULT true NOT NULL
+        active boolean DEFAULT true
 );
 
 /* DB USERS */

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,10 @@ public class TicketSqlDAO implements TicketDAO {
     @Override
     public Ticket create(Ticket ticket) throws TicketNotFoundException {
         String sql = "INSERT INTO ticket (location_id, equipment_id, service_category_id, description, " +
-                                         "employee_id, contractor_id, estimate) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                         "employee_id, contractor_id, estimate, submitted_on) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         KeyHolder ticketKey = new GeneratedKeyHolder();
+        LocalDate today = LocalDate.now();
 
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
@@ -46,6 +49,7 @@ public class TicketSqlDAO implements TicketDAO {
                 ps.setLong(5, ticket.getEmployeeId());
                 ps.setLong(6, ticket.getContractorId());
                 ps.setLong(7, ticket.getEstimate());
+                ps.setDate(8, Date.valueOf(today));
 
                 return ps;
             }
@@ -58,7 +62,7 @@ public class TicketSqlDAO implements TicketDAO {
     public List<Ticket> listAll() {
         List<Ticket> tickets = new ArrayList<>();
         String sql = "SELECT ticket_id, location_id, equipment_id, service_category_id, description, " +
-                            "employee_id, contractor_id, estimate, completed_on, active " +
+                            "employee_id, contractor_id, estimate, submitted_on, completed_on, active " +
                         "FROM ticket";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -74,7 +78,7 @@ public class TicketSqlDAO implements TicketDAO {
     @Override
     public Ticket getTicketById(long id) throws TicketNotFoundException {
         String sql = "SELECT ticket_id, location_id, equipment_id, service_category_id, description, " +
-                            "employee_id, contractor_id, estimate, completed_on, active " +
+                            "employee_id, contractor_id, estimate, submitted_on, completed_on, active " +
                         "FROM ticket WHERE ticket_id = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 
@@ -96,6 +100,7 @@ public class TicketSqlDAO implements TicketDAO {
         ticket.setEmployeeId(row.getLong("employee_id"));
         ticket.setContractorId(row.getLong("contractor_id"));
         ticket.setEstimate(row.getLong("estimate"));
+        ticket.setSubmittedOn(row.getDate("submitted_on").toLocalDate());
 
         if (row.getTimestamp("completed_on") != null) {
             ticket.setCompletedOn(row.getTimestamp("completed_on").toLocalDateTime());

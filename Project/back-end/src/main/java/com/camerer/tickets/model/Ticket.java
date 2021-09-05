@@ -1,6 +1,6 @@
 package com.camerer.tickets.model;
 
-import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Ticket {
@@ -12,6 +12,7 @@ public class Ticket {
     private long employeeId;
     private long contractorId;
     private long estimate;
+    private LocalDate submittedOn;
     private LocalDateTime completedOn;
     private boolean active;
 
@@ -20,7 +21,7 @@ public class Ticket {
     }
 
     public Ticket(long id, long locationId, long equipmentId, long serviceCategoryId, String description,
-                  long employeeId, long contractorId, long estimate, LocalDateTime completedOn, boolean active) {
+                  long employeeId, long contractorId, long estimate, LocalDate submittedOn, LocalDateTime completedOn, boolean active) {
         this.id = id;
         this.locationId = locationId;
         this.equipmentId = equipmentId;
@@ -29,6 +30,7 @@ public class Ticket {
         this.employeeId = employeeId;
         this.contractorId = contractorId;
         this.estimate = estimate;
+        this.submittedOn = submittedOn;
         this.completedOn = completedOn;
         this.active = active;
     }
@@ -95,6 +97,14 @@ public class Ticket {
 
     public void setEstimate(long estimate) {
         this.estimate = estimate;
+    }
+
+    public LocalDate getSubmittedOn() {
+        return submittedOn;
+    }
+
+    public void setSubmittedOn(LocalDate submittedOn) {
+        this.submittedOn = submittedOn;
     }
 
     public LocalDateTime getCompletedOn() {
