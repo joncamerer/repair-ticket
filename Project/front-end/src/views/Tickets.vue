@@ -32,6 +32,12 @@ export default {
         this.$store.commit("SET_EQUIPMENT_CATEGORIES", response.data);
       }
     });
+
+    categoryService.listAll().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_CATEGORIES", response.data);
+      }
+    });
   },
 };
 </script>

@@ -16,4 +16,8 @@ export default {
     listEquipmentCategories() {
         return http.get('/categories');
     },
+
+    listAll() {
+        return http.get('/category')
+    }
 }

@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    categories: {},
     positions: [],
     serviceCategories: [],
     equipmentCategories: [],
@@ -218,6 +219,10 @@ export default createStore({
     ],
   },
   mutations: {
+    SET_CATEGORIES(state, categories) {
+      state.categories = categories;
+    },
+
     SET_POSITIONS(state, positions) {
       state.positions = positions;
     },

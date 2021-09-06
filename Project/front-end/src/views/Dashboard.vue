@@ -47,6 +47,12 @@ export default {
       }
     });
 
+    categoryService.listAll().then((response) => {
+      if (response.status === 200) {
+        this.$store.commit("SET_CATEGORIES", response.data);
+      }
+    });
+
     locationService.list().then((response) => {
       if (response === 200) {
         this.$store.commit("SET_LOCATIONS", response.data);
