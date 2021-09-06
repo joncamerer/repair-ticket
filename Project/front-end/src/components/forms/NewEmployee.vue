@@ -117,7 +117,7 @@
           </select>
         </div>
 
-        <div id="location-box" v-if="isDistrict()">
+        <div id="location-box" v-if="canSelectMultipleLocations">
           <div
             class="location-pair"
             v-for="location in $store.state.locations"
@@ -190,12 +190,12 @@ export default {
   },
   methods: {
     addEmployee() {
-      var today = new Date(this.newEmployee.hireDate);
+      var hireDate = new Date(this.newEmployee.hireDate);
       this.newEmployee.hireDate = new Date(
-        today.getTime() + today.getTimezoneOffset() * 60000
+        hireDate.getTime() + hireDate.getTimezoneOffset() * 60000
       );
 
-      if (this.newEmployee.locationIds === "") {
+      if (this.canSelectMultipleLocations) {
         this.newEmployee.locationIds = this.multipleIds;
       }
 
@@ -218,13 +218,21 @@ export default {
 
       this.newEmployee.hireDate = [year, month, day].join("-");
     },
-    isDistrict() {
-      var isDistrict = false;
-
-      return isDistrict;
-    },
     hideForm() {
       this.$emit("hideForm");
+    },
+  },
+  computed: {
+    canSelectMultipleLocations() {
+      var position = this.$store.state.categories.positions.find(
+        (e) => e.id === this.newEmployee.positionId
+      );
+
+      return (
+        this.newEmployee.positionId !== "" &&
+        (position.name === "Administrator" ||
+          position.name === "District Manager")
+      );
     },
   },
 };

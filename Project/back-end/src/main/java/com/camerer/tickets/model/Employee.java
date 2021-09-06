@@ -27,6 +27,7 @@ public class Employee {
     private LocalDate hireDate;
     @Positive(message = "position is required")
     private long positionId;
+    @NotEmpty(message = "employee must have location assigned")
     private List<Long> locationIds;
 
     public Employee() {
