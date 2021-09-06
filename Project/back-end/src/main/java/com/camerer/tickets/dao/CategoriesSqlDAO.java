@@ -33,11 +33,9 @@ public class CategoriesSqlDAO implements CategoriesDAO {
         return categoriesDTO;
     }
 
-    @Override
-    public List<Position> listPositions() {
+    private List<Position> listPositions() {
         List<Position> positions = new ArrayList<>();
         String sql = "SELECT position_id, name FROM position";
-
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         while (results.next()) {
@@ -48,8 +46,7 @@ public class CategoriesSqlDAO implements CategoriesDAO {
         return positions;
     }
 
-    @Override
-    public List<EquipmentCategory> listEquipmentCategories() {
+    private List<EquipmentCategory> listEquipmentCategories() {
         List<EquipmentCategory> equipmentCategories = new ArrayList<>();
         String sql = "SELECT equipment_category_id, name FROM equipment_category";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -62,8 +59,7 @@ public class CategoriesSqlDAO implements CategoriesDAO {
         return equipmentCategories;
     }
 
-    @Override
-    public List<ServiceCategory> listServiceCategories() {
+    private List<ServiceCategory> listServiceCategories() {
         List<ServiceCategory> serviceCategories = new ArrayList<>();
         String sql = "SELECT service_category_id, name FROM service_category";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
