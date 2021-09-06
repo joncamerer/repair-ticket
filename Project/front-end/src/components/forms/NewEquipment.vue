@@ -45,7 +45,7 @@
           >
             <option value="">--Please select a category</option>
             <option
-              v-for="category in $store.state.equipmentCategories"
+              v-for="category in $store.state.categories.equipmentCategories"
               :key="category.id"
               :value="category.id"
             >

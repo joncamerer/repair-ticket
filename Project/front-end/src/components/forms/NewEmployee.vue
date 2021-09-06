@@ -108,7 +108,7 @@
           <select id="new-emp-position" v-model="newEmployee.positionId">
             <option value="">--Please select a position</option>
             <option
-              v-for="position in $store.state.positions"
+              v-for="position in $store.state.categories.positions"
               :key="position.id"
               :value="position.id"
             >

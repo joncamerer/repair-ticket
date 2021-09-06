@@ -106,7 +106,7 @@
         <div id="service-category-box">
           <div
             class="service-category-pair"
-            v-for="serviceCategory in $store.state.serviceCategories"
+            v-for="serviceCategory in $store.state.categories.serviceCategories"
             :key="serviceCategory.id"
           >
             <label

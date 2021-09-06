@@ -41,7 +41,7 @@
         <select id="new-ticket-category" v-model="newTicket.serviceCategoryId">
           <option value="">--Please select a service category</option>
           <option
-            v-for="category in $store.state.serviceCategories"
+            v-for="category in $store.state.categories.serviceCategories"
             :key="category.id"
             :value="category.id"
           >
