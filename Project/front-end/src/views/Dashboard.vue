@@ -29,24 +29,6 @@ export default {
     EquipmentList,
   },
   created() {
-    categoryService.listPositions().then((response) => {
-      if (response.status === 200) {
-        this.$store.commit("SET_POSITIONS", response.data);
-      }
-    });
-
-    categoryService.listServiceCategories().then((response) => {
-      if (response.status === 200) {
-        this.$store.commit("SET_SERVICE_CATEGORIES", response.data);
-      }
-    });
-
-    categoryService.listEquipmentCategories().then((response) => {
-      if (response.status === 200) {
-        this.$store.commit("SET_EQUIPMENT_CATEGORIES", response.data);
-      }
-    });
-
     categoryService.listAll().then((response) => {
       if (response.status === 200) {
         this.$store.commit("SET_CATEGORIES", response.data);

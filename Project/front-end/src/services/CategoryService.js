@@ -5,19 +5,7 @@ const http = axios.create({
 });
 
 export default {
-    listPositions() {
-        return http.get('/positions');
-    },
-
-    listServiceCategories() {
-        return http.get('/services');
-    },
-
-    listEquipmentCategories() {
-        return http.get('/categories');
-    },
-
     listAll() {
-        return http.get('/category')
+        return http.get('/categories')
     }
 }
