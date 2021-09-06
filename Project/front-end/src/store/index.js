@@ -222,19 +222,33 @@ export default createStore({
     SET_EMPLOYEES(state, employees) {
       state.employees = employees;
     },
+    ADD_EMPLOYEE(state, employee) {
+      state.employees.push(employee);
+    },
     SET_CONTRACTORS(state, contractors) {
       state.contractors = contractors;
+    },
+    ADD_CONTRACTOR(state, contractor) {
+      state.contractors.push(contractor);
     },
     SET_LOCATIONS(state, locations) {
       state.locations = locations;
     },
+    ADD_LOCATION(state, location) {
+      state.contractors.push(location);
+    },
     SET_EQUIPMENT(state, equipment) {
       state.equipment = equipment;
     },
+    ADD_EQUIPMENT(state, equipment) {
+      state.contractors.push(equipment);
+    },
     SET_TICKETS(state, tickets) {
       state.tickets = tickets;
+    },
+    ADD_TICKET(state, ticket) {
+      state.contractors.push(ticket);
     }
-
   },
   actions: {
   },

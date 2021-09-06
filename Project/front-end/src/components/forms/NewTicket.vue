@@ -135,7 +135,10 @@ export default {
     addTicket() {
       ticketService.create(this.newTicket).then((response) => {
         if (response.status === 201) {
-          this.$router.go();
+          var ticket = response.data;
+
+          this.$store.commit("ADD_TICKET", ticket);
+          this.hideForm();
         }
       });
     },

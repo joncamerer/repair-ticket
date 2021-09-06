@@ -95,7 +95,10 @@ export default {
     addLocation() {
       locationService.create(this.newLocation).then((response) => {
         if (response.status === 201) {
-          this.$router.go();
+          var location = response.data;
+
+          this.$store.commit("ADD_LOCATION", location);
+          this.hideForm();
         }
       });
     },

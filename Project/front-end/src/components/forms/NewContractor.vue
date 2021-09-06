@@ -149,7 +149,10 @@ export default {
     addContractor() {
       contractorService.create(this.newContractor).then((response) => {
         if (response.status == 201) {
-          this.$router.go();
+          var contractor = response.data;
+
+          this.$store.commit("ADD_CONTRACTOR", contractor);
+          this.hideForm();
         }
       });
     },

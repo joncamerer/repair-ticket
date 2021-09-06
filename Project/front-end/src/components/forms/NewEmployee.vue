@@ -201,7 +201,10 @@ export default {
 
       employeeService.create(this.newEmployee).then((response) => {
         if (response.status === 201) {
-          this.$router.go();
+          var employee = response.data;
+
+          this.$store.commit("ADD_EMPLOYEE", employee);
+          this.hideForm();
         } else {
           this.resetHireDate();
         }

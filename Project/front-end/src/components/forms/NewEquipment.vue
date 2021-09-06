@@ -93,7 +93,10 @@ export default {
     addEquipment() {
       equipmentService.create(this.newEquipment).then((response) => {
         if (response.status === 201) {
-          this.$router.go();
+          var equipment = response.data;
+
+          this.$store.commit("ADD_EQUIPMENT", equipment);
+          this.hideForm();
         }
       });
     },
